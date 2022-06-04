@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/mmekosh/packages/projects/EAL/include/EAL.hpp
+iostream
+-
+
+/home/mmekosh/packages/projects/EAL/src/EAL.cc
+iostream
+-
+vector
+-
+../include/EAL.hpp
+/home/mmekosh/packages/projects/EAL/include/EAL.hpp
+TString.h
+/home/mmekosh/packages/projects/EAL/src/TString.h
+
