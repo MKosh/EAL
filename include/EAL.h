@@ -1,4 +1,5 @@
-/** 
+/** \file */
+/**
 * \internal
 * MIT License
 * 
@@ -24,18 +25,12 @@
 * \endinternal
 */
 
-#include <iostream>
-#include <vector>
-#include "../include/EAL.h"
-#include "TString.h"
+#pragma once
+
+namespace EAL {
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief A simple test function to print "Hello, world"
-///
-/// A longer description.
-///
-/// @param nothing There are no params for this function.
-void EAL::test() {
-  TString s = "Hello, world";
-  std::cout << s << "\n";
+/// Print out a hello world statement as a test. AHHHH!
+void test();
+
 }
