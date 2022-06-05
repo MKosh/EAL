@@ -27,10 +27,18 @@
 
 #pragma once
 
+#include "Rtypes.h"
+#include "XMLInterface.h"
+
 namespace EAL {
 
 ////////////////////////////////////////////////////////////////////////////////
-/// Print out a hello world statement as a test. AHHHH!
+/// Print out a hello world statement as a test.
 void test();
+
+class BackgroundSample {
+public:
+
+};
 
 }

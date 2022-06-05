@@ -26,13 +26,15 @@
 
 #include <iostream>
 #include <vector>
-#include "../include/EAL.h"
+#include "../include/EAL/XMLInterface.h"
+#include "../include/EAL/Samples.h"
 #include "TString.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief A simple test function to print "Hello, world"
-///
-/// A longer description.
+/// A longer description. Permission is hereby granted, free of charge, to any 
+/// person obtaining a copy of this software and associated documentation files 
+/// (the "Software"), to deal in the Software without restriction, including 
+/// without limitation the rights
 ///
 /// @param nothing There are no params for this function.
 void EAL::test() {

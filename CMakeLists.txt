@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.10)
 project(EAL VERSION 0.1.0 LANGUAGES CXX)
 
 find_package(ROOT REQUIRED)
+#find_package(LibXml2 REQUIRED)
 
 find_package(Doxygen)
 if (DOXYGEN_FOUND)
@@ -19,8 +20,11 @@ else()
   message("Doxygen needs to be installed to generate the documention")
 endif()
 
-add_library(EAL SHARED src/EAL.cc include/EAL.h)
-target_link_libraries(EAL PUBLIC ROOT::Core ROOT::Tree)
+find_library(XML_LIBRARY NAMES libXMLParser.so HINTS ${ROOTSYS}/lib)
 
-add_executable(test src/test.cc)
-target_link_libraries(test PUBLIC EAL)
+add_library(EAL SHARED src/Samples.cc include/EAL/Samples.h src/XMLInterface.cc 
+    include/EAL/XMLInterface.h)
+target_link_libraries(EAL PUBLIC ROOT::Core ROOT::Tree ROOT::ROOTDataFrame ${XML_LIBRARY})
+
+add_executable(EALanalysis src/EALanalysis.cc)
+target_link_libraries(EALanalysis PUBLIC EAL)

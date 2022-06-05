@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['eal_2eh_0',['EAL.h',['../EAL_8h.html',1,'']]]
+  ['backgroundsample_0',['BackgroundSample',['../classEAL_1_1BackgroundSample.html',1,'EAL']]]
 ];
