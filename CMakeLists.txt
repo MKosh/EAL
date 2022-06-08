@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.13)
 
 project(EAL VERSION 0.1.0 LANGUAGES CXX)
 
@@ -22,9 +22,12 @@ endif()
 
 find_library(XML_LIBRARY NAMES libXMLParser.so HINTS ${ROOTSYS}/lib)
 
+#add_subdirectory(include)
+#add_subdirectory(src)
+
 add_library(EAL SHARED src/Samples.cc include/EAL/Samples.h src/XMLInterface.cc 
     include/EAL/XMLInterface.h)
 target_link_libraries(EAL PUBLIC ROOT::Core ROOT::Tree ROOT::ROOTDataFrame ${XML_LIBRARY})
 
-add_executable(EALanalysis src/EALanalysis.cc)
-target_link_libraries(EALanalysis PUBLIC EAL)
+add_subdirectory(app)
+

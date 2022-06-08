@@ -1,0 +1,2 @@
+add_executable(EALapplication EALapplication.cc)
+target_link_libraries(EALapplication LINK_PUBLIC EAL)
