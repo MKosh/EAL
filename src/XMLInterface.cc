@@ -9,14 +9,19 @@
 ////////////////////////////////////////////////////////////////////////////////
 /// Parse "file" and return a pointer to an TXMLDocument.
 /// @param file file name for the XML file to parse
-TXMLNode* EAL::XML::Initialize(const char* file) {
-  auto parser = new TDOMParser();
-  parser->SetValidate(false);
-  parser->ParseFile(file);
+EAL::XML::XMLDocument* EAL::XML::Initialize(const char* file) {
 
-  return parser->GetXMLDocument()->GetRootNode();
 }
 
+TXMLNode* EAL::XML::XMLDocument::GetNextElementNode() {
+  if (m_next_node && m_next_node->GetNodeType() == TXMLNode::kXMLElementNode) 
+      return m_next_node;
+
+  if (m_current_node->HasChildren()) {
+    return m_current_node->GetChildren()->TXMLNode::GetNextNode();
+  }
+
+}
 ////////////////////////////////////////////////////////////////////////////////
 /// Get the s
 
