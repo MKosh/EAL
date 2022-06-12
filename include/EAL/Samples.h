@@ -28,17 +28,21 @@
 #pragma once
 
 #include "Rtypes.h"
-#include "XMLInterface.h"
+//#include "XMLInterface.h"
 
 namespace EAL {
 
 ////////////////////////////////////////////////////////////////////////////////
-/// Print out a hello world statement as a test.
-void test();
-
-class BackgroundSample {
+/// 
+class Sample {
 public:
+  enum Classification {
+    data,
+    signal,
+    background,
+  };
 
+  
 };
 
 }
