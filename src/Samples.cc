@@ -27,7 +27,7 @@
 #include <iostream>
 #include <vector>
 #include "../include/EAL/XMLInterface.h"
-#include "../include/EAL/Samples.h"
+#include "Samples.h"
 #include "TString.h"
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -22,11 +22,7 @@ endif()
 
 find_library(XML_LIBRARY NAMES libXMLParser.so HINTS ${ROOTSYS}/lib)
 
-#add_subdirectory(include)
-#add_subdirectory(src)
-
-add_library(EAL SHARED src/Samples.cc include/EAL/Samples.h src/XMLInterface.cc 
-    include/EAL/XMLInterface.h)
+add_library(EAL SHARED src/Samples.cc src/Samples.h)
 target_link_libraries(EAL PUBLIC ROOT::Core ROOT::Tree ROOT::ROOTDataFrame ${XML_LIBRARY})
 
 add_subdirectory(app)

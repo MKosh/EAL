@@ -5,7 +5,7 @@
 #include "TXMLDocument.h"
 #include "TXMLNode.h"
 #include "TXMLAttr.h"
-#include "../include/EAL/Samples.h"
+#include "../src/Samples.h"
 #include "../include/EAL/XMLInterface.h"
 
 

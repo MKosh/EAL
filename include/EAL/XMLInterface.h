@@ -62,4 +62,5 @@ private:
 /// Create a ROOT XML parser from an XML file
 XMLDocument* Initialize(const char* file);
 }
+void test();
 }
