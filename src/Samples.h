@@ -28,11 +28,6 @@ namespace EAL {
 /// 
 class Sample {
 private:
-  enum Classification {
-    kData,
-    kSignal,
-    kBackground,
-  };
 
   TString m_sample; // Sample (file) name
   TString m_directory; // File location // Optional
@@ -55,11 +50,17 @@ public:
     m_directory = initializer.at("directory");
     m_process = initializer.at("process");
     m_classification = initializer.at("class");
-    m_nMCgen = std::atol(initializer.at("nMCgen").Data());
-    
-    m_file = std::unique_ptr<TFile>(new TFile(m_directory+m_sample+".root", "UPDATE"));
-    m_tree = std::make_unique<TTree>(m_file->Get<TTree*>("Events"));
+    m_luminosity = std::atof(initializer.at("lumi").Data());
+    m_nMCgen = std::atol(initializer.at("nMC").Data());
+    m_nMCgen_neg = std::atol(initializer.at("nMCneg"));
+    //m_file = std::unique_ptr<TFile>(new TFile(m_directory+m_sample+".root", "UPDATE"));
+    //m_tree = std::make_unique<TTree>(m_file->Get<TTree*>("Events"));
+    m_sample_weight = m_xsec/m_ngen;
+    m_ngen = m_nMCgen - 2*m_nMCgen_neg;
   }
+  
+  Int_t OpenFile(TString file);
+  Int_t SetTree(TString tree);
   
 
 };

@@ -1,0 +1,7 @@
+<Samples>
+  <_2016 directory="/mnt/Storage/ntuples/2016/haddedFiles">
+    <data process="data" class="data" sample="Data" lumi="1.0" xsec="1.0" nMC="1" nMCneg="0" />
+    <signal process="VBS_EWK" class="signal" sample="WminusTo2JZTo2LJJ_EWK_LO_SM_MJJ100PTJ10_TuneCUETP8M1_13TeV-madgraph-pythia8" lumi="35867.06" xsec="0.02982" nMC="200000.0" nMCneg="0" />
+    <background process="Diboson" class="background" sample="WminusTo2JZTo2LJJ_QCD_LO_SM_MJJ100PTJ10_TuneCUETP8M1_13TeV-madgraph-pythia8" lumi="35867.06" xsec="0.3488" nMC="500000.0" nMCneg="0" />
+  </_2016>
+</Samples>
