@@ -3,17 +3,12 @@
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classEAL_1_1Sample_ab6ad0056774328cb458a4fbbc67e57f4}\label{classEAL_1_1Sample_ab6ad0056774328cb458a4fbbc67e57f4}} 
-{\bfseries Sample} (std\+::unordered\+\_\+map$<$ const char $\ast$, TString $>$ initializer)
-\end{DoxyCompactItemize}
-\doxysubsection*{Private Types}
-\begin{DoxyCompactItemize}
+\mbox{\Hypertarget{classEAL_1_1Sample_aa942c942331621eb0b505ffe64d98cac}\label{classEAL_1_1Sample_aa942c942331621eb0b505ffe64d98cac}} 
+{\bfseries Sample} (std\+::unordered\+\_\+map$<$ std\+::string, TString $>$ initializer)
 \item 
-\mbox{\Hypertarget{classEAL_1_1Sample_a971fd7d08701bdec69630a54749bdd64}\label{classEAL_1_1Sample_a971fd7d08701bdec69630a54749bdd64}} 
-enum {\bfseries Classification} \{ {\bfseries k\+Data}
-, {\bfseries k\+Signal}
-, {\bfseries k\+Background}
- \}
+Int\+\_\+t \mbox{\hyperlink{classEAL_1_1Sample_a440795a4a014380396869378e8155c7c}{Open\+File}} (TString file)
+\item 
+Int\+\_\+t \mbox{\hyperlink{classEAL_1_1Sample_ab010f3f06c216fd34fb565f59443e746}{Set\+Tree}} (TString tree)
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -26,6 +21,9 @@ TString {\bfseries m\+\_\+directory}
 \item 
 \mbox{\Hypertarget{classEAL_1_1Sample_a233a3efd2f42fcea032ff37a65a4b03f}\label{classEAL_1_1Sample_a233a3efd2f42fcea032ff37a65a4b03f}} 
 TString {\bfseries m\+\_\+process}
+\item 
+\mbox{\Hypertarget{classEAL_1_1Sample_a6d149ca62959acd0abc7619f5b3b223e}\label{classEAL_1_1Sample_a6d149ca62959acd0abc7619f5b3b223e}} 
+TString {\bfseries m\+\_\+classification}
 \item 
 \mbox{\Hypertarget{classEAL_1_1Sample_a6122de25fa326b3baa4cab3546371fad}\label{classEAL_1_1Sample_a6122de25fa326b3baa4cab3546371fad}} 
 Long\+\_\+t {\bfseries m\+\_\+nevents}
@@ -47,9 +45,45 @@ Float\+\_\+t {\bfseries m\+\_\+luminosity}
 \item 
 \mbox{\Hypertarget{classEAL_1_1Sample_a98712519fb0cc7e19fe776caa815d3ad}\label{classEAL_1_1Sample_a98712519fb0cc7e19fe776caa815d3ad}} 
 Float\+\_\+t {\bfseries m\+\_\+sample\+\_\+weight}
+\item 
+\mbox{\Hypertarget{classEAL_1_1Sample_af7bcfa4cd978fb96434c35ffa75c60ad}\label{classEAL_1_1Sample_af7bcfa4cd978fb96434c35ffa75c60ad}} 
+std\+::unique\+\_\+ptr$<$ TFile $>$ {\bfseries m\+\_\+file}
+\item 
+\mbox{\Hypertarget{classEAL_1_1Sample_a3f0f81ae35050a0cea2c44a9ab6d7f11}\label{classEAL_1_1Sample_a3f0f81ae35050a0cea2c44a9ab6d7f11}} 
+TTree $\ast$ {\bfseries m\+\_\+tree}
 \end{DoxyCompactItemize}
 
 
-The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classEAL_1_1Sample_a440795a4a014380396869378e8155c7c}\label{classEAL_1_1Sample_a440795a4a014380396869378e8155c7c}} 
+\index{EAL::Sample@{EAL::Sample}!OpenFile@{OpenFile}}
+\index{OpenFile@{OpenFile}!EAL::Sample@{EAL::Sample}}
+\doxysubsubsection{\texorpdfstring{OpenFile()}{OpenFile()}}
+{\footnotesize\ttfamily Int\+\_\+t EAL\+::\+Sample\+::\+Open\+File (\begin{DoxyParamCaption}\item[{TString}]{file }\end{DoxyParamCaption})}
+
+Open the sample\textquotesingle{}s .root file
+
+
+\begin{DoxyParams}{Parameters}
+{\em file} & The name of the file given as a TString \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEAL_1_1Sample_ab010f3f06c216fd34fb565f59443e746}\label{classEAL_1_1Sample_ab010f3f06c216fd34fb565f59443e746}} 
+\index{EAL::Sample@{EAL::Sample}!SetTree@{SetTree}}
+\index{SetTree@{SetTree}!EAL::Sample@{EAL::Sample}}
+\doxysubsubsection{\texorpdfstring{SetTree()}{SetTree()}}
+{\footnotesize\ttfamily Int\+\_\+t EAL\+::\+Sample\+::\+Set\+Tree (\begin{DoxyParamCaption}\item[{TString}]{tree }\end{DoxyParamCaption})}
+
+Open the sample\textquotesingle{}s TTree
+
+
+\begin{DoxyParams}{Parameters}
+{\em tree} & The name of the tree given as a TString \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-src/\mbox{\hyperlink{Samples_8h}{Samples.\+h}}\end{DoxyCompactItemize}
+src/\mbox{\hyperlink{Sample_8h}{Sample.\+h}}\item 
+src/Sample.\+cc\end{DoxyCompactItemize}

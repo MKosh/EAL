@@ -5,18 +5,19 @@
 #include "TXMLDocument.h"
 #include "TXMLNode.h"
 #include "TXMLAttr.h"
-#include "../src/Samples.h"
+#include "../src/Sample.h"
 #include "../include/EAL/XMLInterface.h"
 
 
 int main() {
-  EAL::test();
-  //auto node = EAL::XML::Initialize("../datasets/dataset_2016.xml");
-
-  //node = node->GetChildren()->GetNextNode();
-  
-  //TList* attr_list = node.get()->GetAttributes();
-  //std::cout << node->GetNodeName() << "\n";
+  // Load the XML files and read the contents into an initializer map. 
+  // Make "Sample"s from the maps.
+  // Assign each sample to a process.
+  // Convert sample's trees into a large process-based dataframe.
+  // Save the df's as new intermediate trees.
+  // Load those trees into TMVA.
+  // Train and apply.
+  // Graph the results.
 
   return 0;
 }

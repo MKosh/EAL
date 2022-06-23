@@ -68,7 +68,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pri-types">Private Types</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classEAL_1_1Sample-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -78,17 +77,13 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab6ad0056774328cb458a4fbbc67e57f4"><td class="memItemLeft" align="right" valign="top"><a id="ab6ad0056774328cb458a4fbbc67e57f4"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Sample</b> (std::unordered_map&lt; const char *, TString &gt; initializer)</td></tr>
-<tr class="separator:ab6ad0056774328cb458a4fbbc67e57f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-types"></a>
-Private Types</h2></td></tr>
-<tr class="memitem:a971fd7d08701bdec69630a54749bdd64"><td class="memItemLeft" align="right" valign="top"><a id="a971fd7d08701bdec69630a54749bdd64"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>Classification</b> { <b>kData</b>
-, <b>kSignal</b>
-, <b>kBackground</b>
- }</td></tr>
-<tr class="separator:a971fd7d08701bdec69630a54749bdd64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa942c942331621eb0b505ffe64d98cac"><td class="memItemLeft" align="right" valign="top"><a id="aa942c942331621eb0b505ffe64d98cac"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Sample</b> (std::unordered_map&lt; std::string, TString &gt; initializer)</td></tr>
+<tr class="separator:aa942c942331621eb0b505ffe64d98cac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a440795a4a014380396869378e8155c7c"><td class="memItemLeft" align="right" valign="top">Int_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEAL_1_1Sample.html#a440795a4a014380396869378e8155c7c">OpenFile</a> (TString file)</td></tr>
+<tr class="separator:a440795a4a014380396869378e8155c7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab010f3f06c216fd34fb565f59443e746"><td class="memItemLeft" align="right" valign="top">Int_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEAL_1_1Sample.html#ab010f3f06c216fd34fb565f59443e746">SetTree</a> (TString tree)</td></tr>
+<tr class="separator:ab010f3f06c216fd34fb565f59443e746"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -101,6 +96,9 @@ TString&#160;</td><td class="memItemRight" valign="bottom"><b>m_directory</b></t
 <tr class="memitem:a233a3efd2f42fcea032ff37a65a4b03f"><td class="memItemLeft" align="right" valign="top"><a id="a233a3efd2f42fcea032ff37a65a4b03f"></a>
 TString&#160;</td><td class="memItemRight" valign="bottom"><b>m_process</b></td></tr>
 <tr class="separator:a233a3efd2f42fcea032ff37a65a4b03f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d149ca62959acd0abc7619f5b3b223e"><td class="memItemLeft" align="right" valign="top"><a id="a6d149ca62959acd0abc7619f5b3b223e"></a>
+TString&#160;</td><td class="memItemRight" valign="bottom"><b>m_classification</b></td></tr>
+<tr class="separator:a6d149ca62959acd0abc7619f5b3b223e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6122de25fa326b3baa4cab3546371fad"><td class="memItemLeft" align="right" valign="top"><a id="a6122de25fa326b3baa4cab3546371fad"></a>
 Long_t&#160;</td><td class="memItemRight" valign="bottom"><b>m_nevents</b></td></tr>
 <tr class="separator:a6122de25fa326b3baa4cab3546371fad"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -122,9 +120,67 @@ Float_t&#160;</td><td class="memItemRight" valign="bottom"><b>m_luminosity</b></
 <tr class="memitem:a98712519fb0cc7e19fe776caa815d3ad"><td class="memItemLeft" align="right" valign="top"><a id="a98712519fb0cc7e19fe776caa815d3ad"></a>
 Float_t&#160;</td><td class="memItemRight" valign="bottom"><b>m_sample_weight</b></td></tr>
 <tr class="separator:a98712519fb0cc7e19fe776caa815d3ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7bcfa4cd978fb96434c35ffa75c60ad"><td class="memItemLeft" align="right" valign="top"><a id="af7bcfa4cd978fb96434c35ffa75c60ad"></a>
+std::unique_ptr&lt; TFile &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_file</b></td></tr>
+<tr class="separator:af7bcfa4cd978fb96434c35ffa75c60ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f0f81ae35050a0cea2c44a9ab6d7f11"><td class="memItemLeft" align="right" valign="top"><a id="a3f0f81ae35050a0cea2c44a9ab6d7f11"></a>
+TTree *&#160;</td><td class="memItemRight" valign="bottom"><b>m_tree</b></td></tr>
+<tr class="separator:a3f0f81ae35050a0cea2c44a9ab6d7f11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/<a class="el" href="Samples_8h_source.html">Samples.h</a></li>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a440795a4a014380396869378e8155c7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a440795a4a014380396869378e8155c7c">&#9670;&nbsp;</a></span>OpenFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Int_t EAL::Sample::OpenFile </td>
+          <td>(</td>
+          <td class="paramtype">TString&#160;</td>
+          <td class="paramname"><em>file</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Open the sample's .root file</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file</td><td>The name of the file given as a TString </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab010f3f06c216fd34fb565f59443e746"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab010f3f06c216fd34fb565f59443e746">&#9670;&nbsp;</a></span>SetTree()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Int_t EAL::Sample::SetTree </td>
+          <td>(</td>
+          <td class="paramtype">TString&#160;</td>
+          <td class="paramname"><em>tree</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Open the sample's TTree</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tree</td><td>The name of the tree given as a TString </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>src/<a class="el" href="Sample_8h_source.html">Sample.h</a></li>
+<li>src/Sample.cc</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

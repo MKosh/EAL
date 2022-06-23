@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['test_5',['test',['../Samples_8h.html#a6c840aaf96d8962750793a247887411c',1,'EAL']]]
+  ['openfile_14',['OpenFile',['../classEAL_1_1Sample.html#a440795a4a014380396869378e8155c7c',1,'EAL::Sample']]]
 ];

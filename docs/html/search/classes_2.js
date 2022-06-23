@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['xmldocument_6',['XMLDocument',['../classEAL_1_1XML_1_1XMLDocument.html',1,'EAL::XML']]]
+  ['sample_11',['Sample',['../classEAL_1_1Sample.html',1,'EAL']]]
 ];

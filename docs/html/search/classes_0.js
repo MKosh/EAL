@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['a_4',['A',['../classA.html',1,'']]]
+  ['a_8',['A',['../classA.html',1,'']]],
+  ['analysis_9',['Analysis',['../classAnalysis.html',1,'']]]
 ];

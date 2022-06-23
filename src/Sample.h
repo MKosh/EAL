@@ -12,14 +12,14 @@
 #include "TTree.h"
 //#include "XMLInterface.h"
 
-namespace std {
-  template<>
-  struct hash<TString> {
-    size_t operator()(const TString& key) {
-      return hash<std::string>()(std::string(key.Data()));
-    }
-  };
-} // namespace st 
+//namespace std {
+//  template<>
+//  struct hash<TString> {
+//    std::size_t operator()(const TString& key) {
+//      return hash<TString>()(key.Data());
+//    }
+//  };
+//} // namespace st 
 
 
 namespace EAL {
@@ -41,11 +41,11 @@ private:
   Float_t m_luminosity;
   Float_t m_sample_weight; // xsec/ngen
   std::unique_ptr<TFile> m_file;
-  std::unique_ptr<TTree> m_tree;
+  TTree* m_tree;
 
 public:
 
-  Sample(std::unordered_map<TString, TString> initializer) {
+  Sample(std::unordered_map<std::string, TString> initializer) {
     m_sample = initializer.at("sample");
     m_directory = initializer.at("directory");
     m_process = initializer.at("process");
@@ -53,8 +53,8 @@ public:
     m_luminosity = std::atof(initializer.at("lumi").Data());
     m_nMCgen = std::atol(initializer.at("nMC").Data());
     m_nMCgen_neg = std::atol(initializer.at("nMCneg"));
-    //m_file = std::unique_ptr<TFile>(new TFile(m_directory+m_sample+".root", "UPDATE"));
-    //m_tree = std::make_unique<TTree>(m_file->Get<TTree*>("Events"));
+    m_file = std::unique_ptr<TFile>(new TFile(m_directory+m_sample+".root", "UPDATE"));
+    m_tree = m_file->Get<TTree>("Events");
     m_sample_weight = m_xsec/m_ngen;
     m_ngen = m_nMCgen - 2*m_nMCgen_neg;
   }
@@ -62,7 +62,6 @@ public:
   Int_t OpenFile(TString file);
   Int_t SetTree(TString tree);
   
-
 };
 
 //class BackgroundSample : public Sample {

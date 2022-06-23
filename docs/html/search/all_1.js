@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['sample_1',['Sample',['../classEAL_1_1Sample.html',1,'EAL']]],
-  ['samples_2eh_2',['Samples.h',['../Samples_8h.html',1,'']]]
+  ['openfile_2',['OpenFile',['../classEAL_1_1Sample.html#a440795a4a014380396869378e8155c7c',1,'EAL::Sample']]]
 ];
