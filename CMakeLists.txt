@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.13)
 project(EAL VERSION 0.1.0 LANGUAGES CXX)
 
 find_package(ROOT REQUIRED)
-#find_package(LibXml2 REQUIRED)
+#find_package(nlohmann_json 3.10.5)
 
 find_package(Doxygen)
 if (DOXYGEN_FOUND)

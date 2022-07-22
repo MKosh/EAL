@@ -5,7 +5,7 @@
 
 #include <iostream>
 #include <vector>
-#include "../include/EAL/XMLInterface.h"
+#include "../include/json.hpp"
 #include "Sample.h"
 #include "TString.h"
 
@@ -16,10 +16,10 @@
 /// without limitation the rights
 ///
 /// @param nothing There are no params for this function.
-void EAL::test() {
-  TString s = "Hello, world";
-  std::cout << s << "\n";
-};
+//void EAL::test() {
+//  TString s = "Hello, world";
+//  std::cout << s << "\n";
+//};
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Open the sample's .root file 
