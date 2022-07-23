@@ -4,8 +4,9 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
+                "${workspaceFolder}/src",
                 "/usr/local/include/",
-                "~/packages/root/include",
+                "~/packages/root/include/",
                 "~/packages/root/lib"
             ],
             "defines": [],

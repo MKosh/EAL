@@ -5,9 +5,9 @@
 #include "Sample.h"
 #include "../include/nlohmann/json.hpp"
 
-
+using json = nlohmann::json;
 namespace EAL{
-using json = nlohamann::json;
+
 ////////////////////////////////////////////////////////////////////////////////
 /// 
 class Process {

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Exploratory Analysis Library: include/json.hpp Source File</title>
+<title>Exploratory Analysis Library: include/nlohmann/json.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,7 +62,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_fa316d1ecd71465cbeab17f4208e6946.html">nlohmann</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -19643,13 +19643,13 @@ $(function() {
 <div class="line"><a name="l21893"></a><span class="lineno">21893</span>&#160;} <span class="comment">// namespace std</span></div>
 <div class="line"><a name="l21894"></a><span class="lineno">21894</span>&#160; </div>
 <div class="line"><a name="l21897"></a><span class="lineno">21897</span>&#160;JSON_HEDLEY_NON_NULL(1)</div>
-<div class="line"><a name="l21898"></a><span class="lineno">21898</span>&#160;inline <a class="code" href="namespacenlohmann.html">nlohmann</a>::<a class="code" href="namespacenlohmann.html#a2bfd99e845a2e5cd90aeaf1b1431f474">json</a> operator &quot;&quot; _json(const <span class="keywordtype">char</span>* s, std::<span class="keywordtype">size_t</span> n)</div>
+<div class="line"><a name="l21898"></a><span class="lineno">21898</span>&#160;inline <a class="code" href="namespacenlohmann.html">nlohmann</a>::<a class="code" href="classnlohmann_1_1basic__json.html">json</a> operator &quot;&quot; _json(const <span class="keywordtype">char</span>* s, std::<span class="keywordtype">size_t</span> n)</div>
 <div class="line"><a name="l21899"></a><span class="lineno">21899</span>&#160;{</div>
 <div class="line"><a name="l21900"></a><span class="lineno">21900</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classnlohmann_1_1basic__json.html#a15018ade392a844ea32d5188d1a0b9c6">nlohmann::json::parse</a>(s, s + n);</div>
 <div class="line"><a name="l21901"></a><span class="lineno">21901</span>&#160;}</div>
 <div class="line"><a name="l21902"></a><span class="lineno">21902</span>&#160; </div>
 <div class="line"><a name="l21905"></a><span class="lineno">21905</span>&#160;JSON_HEDLEY_NON_NULL(1)</div>
-<div class="line"><a name="l21906"></a><span class="lineno">21906</span>&#160;inline <a class="code" href="namespacenlohmann.html">nlohmann</a>::<a class="code" href="namespacenlohmann.html#a2bfd99e845a2e5cd90aeaf1b1431f474">json</a>::json_pointer operator &quot;&quot; _json_pointer(const <span class="keywordtype">char</span>* s, std::<span class="keywordtype">size_t</span> n)</div>
+<div class="line"><a name="l21906"></a><span class="lineno">21906</span>&#160;inline <a class="code" href="namespacenlohmann.html">nlohmann</a>::<a class="code" href="classnlohmann_1_1basic__json.html">json</a>::json_pointer operator &quot;&quot; _json_pointer(const <span class="keywordtype">char</span>* s, std::<span class="keywordtype">size_t</span> n)</div>
 <div class="line"><a name="l21907"></a><span class="lineno">21907</span>&#160;{</div>
 <div class="line"><a name="l21908"></a><span class="lineno">21908</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classnlohmann_1_1basic__json.html#aa8f1f93b32da01b42413643be32b2c27">nlohmann::json::json_pointer</a>(std::string(s, n));</div>
 <div class="line"><a name="l21909"></a><span class="lineno">21909</span>&#160;}</div>
@@ -20398,7 +20398,6 @@ $(function() {
 <div class="ttc" id="anamespacenlohmann_1_1detail_html_aa554fc6a11519e4f347deb25a9f0db40"><div class="ttname"><a href="namespacenlohmann_1_1detail.html#aa554fc6a11519e4f347deb25a9f0db40">nlohmann::detail::input_format_t</a></div><div class="ttdeci">input_format_t</div><div class="ttdoc">the supported input formats</div><div class="ttdef"><b>Definition:</b> json.hpp:5233</div></div>
 <div class="ttc" id="anamespacenlohmann_1_1detail_html_aceff996baf082d6dc1873ad176d10609"><div class="ttname"><a href="namespacenlohmann_1_1detail.html#aceff996baf082d6dc1873ad176d10609">nlohmann::detail::replace_substring</a></div><div class="ttdeci">void replace_substring(std::string &amp;s, const std::string &amp;f, const std::string &amp;t)</div><div class="ttdoc">replace all occurrences of a substring by another string</div><div class="ttdef"><b>Definition:</b> json.hpp:2725</div></div>
 <div class="ttc" id="anamespacenlohmann_html"><div class="ttname"><a href="namespacenlohmann.html">nlohmann</a></div><div class="ttdoc">namespace for Niels Lohmann</div><div class="ttdef"><b>Definition:</b> json.hpp:98</div></div>
-<div class="ttc" id="anamespacenlohmann_html_a2bfd99e845a2e5cd90aeaf1b1431f474"><div class="ttname"><a href="namespacenlohmann.html#a2bfd99e845a2e5cd90aeaf1b1431f474">nlohmann::json</a></div><div class="ttdeci">basic_json&lt;&gt; json</div><div class="ttdoc">default specialization</div><div class="ttdef"><b>Definition:</b> json.hpp:3337</div></div>
 <div class="ttc" id="anamespacenlohmann_html_a6ce645a0b8717757e096a5b5773b7a16"><div class="ttname"><a href="namespacenlohmann.html#a6ce645a0b8717757e096a5b5773b7a16">nlohmann::to_string</a></div><div class="ttdeci">NLOHMANN_BASIC_JSON_TPL_DECLARATION std::string to_string(const NLOHMANN_BASIC_JSON_TPL &amp;j)</div><div class="ttdoc">user-defined to_string function for JSON values</div><div class="ttdef"><b>Definition:</b> json.hpp:21838</div></div>
 <div class="ttc" id="astructnlohmann_1_1adl__serializer_html"><div class="ttname"><a href="structnlohmann_1_1adl__serializer.html">nlohmann::adl_serializer</a></div><div class="ttdoc">default JSONSerializer template argument</div><div class="ttdef"><b>Definition:</b> json.hpp:4926</div></div>
 <div class="ttc" id="astructnlohmann_1_1adl__serializer_html_a8180f52bf21fc610705bc521f22116ae"><div class="ttname"><a href="structnlohmann_1_1adl__serializer.html#a8180f52bf21fc610705bc521f22116ae">nlohmann::adl_serializer::from_json</a></div><div class="ttdeci">static auto from_json(BasicJsonType &amp;&amp;j, TargetType &amp;val) noexcept(noexcept(::nlohmann::from_json(std::forward&lt; BasicJsonType &gt;(j), val))) -&gt; decltype(::nlohmann::from_json(std::forward&lt; BasicJsonType &gt;(j), val), void())</div><div class="ttdoc">convert a JSON value to any value type</div><div class="ttdef"><b>Definition:</b> json.hpp:4930</div></div>

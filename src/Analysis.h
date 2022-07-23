@@ -3,7 +3,7 @@
 #include <vector>
 #include <string>
 #include <fstream>
-#include "./Sample.h"
+#include "Sample.h"
 #include "Process.h"
 #include "../include/nlohmann/json.hpp"
 
