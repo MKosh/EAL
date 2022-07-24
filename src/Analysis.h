@@ -23,15 +23,17 @@ public:
     json dataset_list;
     input_file >> dataset_list;
 
+/*
     if (dataset_list.contains("global_directory"))
       m_common_directory = dataset_list["global_directory"];
 
-    for(const auto& process : processes) {
+    for(const auto& process : dataset_list) {
       if (process.key() == "global_directory" && process.value() != "") {
-        m_directory = process.value();
+        m_common_directory = process.value();
       } else {
         m_processes.emplace_back(process.value(), process.key());
       }
     }
+*/
   }
 };

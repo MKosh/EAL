@@ -93,23 +93,23 @@ $(function() {
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="classnlohmann_1_1basic__json.html">json</a> dataset_list;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    input_file &gt;&gt; dataset_list;</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordflow">if</span> (dataset_list.<a class="code" href="classnlohmann_1_1basic__json.html#a02c9bc4d0f33b7dec20b2798301d6971">contains</a>(<span class="stringliteral">&quot;global_directory&quot;</span>))</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;      m_common_directory = dataset_list[<span class="stringliteral">&quot;global_directory&quot;</span>];</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; process : processes) {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;      <span class="keywordflow">if</span> (process.key() == <span class="stringliteral">&quot;global_directory&quot;</span> &amp;&amp; process.value() != <span class="stringliteral">&quot;&quot;</span>) {</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        m_directory = process.<a class="code" href="classnlohmann_1_1basic__json.html#a11641b35219676b225d9bd15c7677659">value</a>();</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        m_processes.emplace_back(process.value(), process.key());</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;      }</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    }</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  }</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;};</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">    if (dataset_list.contains(&quot;global_directory&quot;))</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">      m_common_directory = dataset_list[&quot;global_directory&quot;];</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">    for(const auto&amp; process : dataset_list) {</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">      if (process.key() == &quot;global_directory&quot; &amp;&amp; process.value() != &quot;&quot;) {</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">        m_common_directory = process.value();</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">      } else {</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">        m_processes.emplace_back(process.value(), process.key());</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">      }</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">    }</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  }</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;};</div>
 <div class="ttc" id="aSample_8h_html"><div class="ttname"><a href="Sample_8h.html">Sample.h</a></div></div>
 <div class="ttc" id="aclassAnalysis_html"><div class="ttname"><a href="classAnalysis.html">Analysis</a></div><div class="ttdef"><b>Definition:</b> Analysis.h:13</div></div>
 <div class="ttc" id="aclassnlohmann_1_1basic__json_html"><div class="ttname"><a href="classnlohmann_1_1basic__json.html">nlohmann::basic_json</a></div><div class="ttdoc">a class to store JSON values</div><div class="ttdef"><b>Definition:</b> json.hpp:17282</div></div>
-<div class="ttc" id="aclassnlohmann_1_1basic__json_html_a02c9bc4d0f33b7dec20b2798301d6971"><div class="ttname"><a href="classnlohmann_1_1basic__json.html#a02c9bc4d0f33b7dec20b2798301d6971">nlohmann::basic_json::contains</a></div><div class="ttdeci">bool contains(KeyT &amp;&amp;key) const</div><div class="ttdoc">check the existence of an element in a JSON object</div><div class="ttdef"><b>Definition:</b> json.hpp:19640</div></div>
-<div class="ttc" id="aclassnlohmann_1_1basic__json_html_a11641b35219676b225d9bd15c7677659"><div class="ttname"><a href="classnlohmann_1_1basic__json.html#a11641b35219676b225d9bd15c7677659">nlohmann::basic_json::value</a></div><div class="ttdeci">ValueType value(const typename object_t::key_type &amp;key, const ValueType &amp;default_value) const</div><div class="ttdoc">access specified object element with default value</div><div class="ttdef"><b>Definition:</b> json.hpp:19319</div></div>
 <div class="ttc" id="anamespacenlohmann_html_a2bfd99e845a2e5cd90aeaf1b1431f474"><div class="ttname"><a href="namespacenlohmann.html#a2bfd99e845a2e5cd90aeaf1b1431f474">nlohmann::json</a></div><div class="ttdeci">basic_json&lt;&gt; json</div><div class="ttdoc">default specialization</div><div class="ttdef"><b>Definition:</b> json.hpp:3337</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

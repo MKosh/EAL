@@ -1,4 +1,6 @@
 {
+  "analysis_directory": "data/ntuples/",
+
   "data": {
       "class": "data",
       "lumi": 1.0,
@@ -11,7 +13,7 @@
     "class": "signal",
     "lumi": 35867.06,
     "samples": [
-      {"name": "WminusTo2JZTo2LJJ_EWK_LO_SM_MJJ100PTJ10_TuneCUETP8M1_13TeV-madgraph-pythia8"      , "xs": 0.02982, "nMC": 200000.0 , "nMCneg": 0},
+      {"name": "WminusTo2JZTo2LJJ_EWK_LO_SM_MJJ100PTJ10_TuneCUETP8M1_13TeV-madgraph-pythia8"      ,"xs": 0.02982, "nMC": 200000.0 , "nMCneg": 0},
       {"name": "ZTo2LZTo2JJJ_EWK_LO_SM_MJJ100PTJ10_TuneCUETP8M1_13TeV-madgraph-pythia8"           , "xs": 0.01589, "nMC": 100000.0 , "nMCneg": 0}
     ]
   },
