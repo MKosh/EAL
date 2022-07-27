@@ -32,8 +32,6 @@ public:
     for (const auto& smpl : process_init.at("samples")) {
       m_samples.emplace_back(smpl, m_process_directory);
     }
-
-  // for(auto& it : j["VBS_EWK"]["filelist"].items()) { samples.push_back(it.value()["name"]); }
   }
 
   void GetSampleNames() {
