@@ -5,7 +5,7 @@
 
 #include <iostream>
 #include <vector>
-#include "../include/json.hpp"
+#include "../include/nlohmann/json.hpp"
 #include "Sample.h"
 #include "TString.h"
 

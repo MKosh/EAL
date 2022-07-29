@@ -1,0 +1,3 @@
+TMVA config options for BDT and DNN written as proper JSON instead of as just the strings. 
+    {"name":"BDT", "Types":"kBDT", "NTrees":1000, "MaxDepth":4, "BoostType":"AdaBoost", "MinNodeSize":"1%", "AdaBoostBeta":0.2, "UseBaggedBoost":true, },
+    {"name":"DNN_GPU", "Types":"kDL", "Architecture":"GPU", "ErrorStrategy":"CROSSENTROPY", "Layout":"RELU|256,LINEAR", "VarTransform":"N", "WeightInitialization":"XAVIERUNIFORM"}

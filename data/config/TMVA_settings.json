@@ -1,7 +1,7 @@
 {
   "methods": [
-    {"name":"BDT", "Types":"kBDT", "NTrees":1000, "MaxDepth":4, "BoostType":"AdaBoost"},
-    {"name":"DNN_GPU", "Types":"kDL"}
+    {"name":"BDT", "Types":"kBDT", "options":"!H:!V:NTrees=1000:MinNodeSize=1%:MaxDepth=4:BoostType=AdaBoost:AdaBoostBeta=0.2:UseBaggedBoost:BaggedSampleFraction=0.5:SeparationType=GiniIndex:nCuts=20:UseRandomisedTrees=False:UseNvars=2:NegWeightTreatment=IgnoreNegWeightsInTraining"},
+    {"name":"DNN_GPU", "Types":"kDL", "options":"!H:V:ErrorStrategy=CROSSENTROPY:VarTransform=N:WeightInitialization=XAVIERUNIFORM:Layout=RELU|256,LINEAR::Architecture=GPU"}
   ],
 
   "variables": [
