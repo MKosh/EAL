@@ -1,6 +1,8 @@
 #include <iostream>
 #include <ranges>
+#include <memory>
 #include <vector>
+#include <map>
 #include <fstream>
 #include <TFile.h>
 #include "TObjArray.h"  
@@ -32,7 +34,8 @@ int EALapplication() {
   else
     common_directory = "";
 
-  std::vector<EAL::Process>* processes = new std::vector<EAL::Process>;
+  //std::vector<EAL::Process>* processes = new std::vector<EAL::Process>;
+  auto processes = std::make_unique<std::vector<EAL::Process>>();
   std::vector<std::string> files;
 
   for (const auto& proc : dataset_list.items()) {
@@ -47,6 +50,12 @@ int EALapplication() {
   }
 
   TMVATraining train("data/config/TMVA_settings.json");
+
+  auto setProcessID = [&](auto& proc){return proc.m_process_id;}
+  for (const auto& process : *processes) {
+    ROOT::RDataFrame df("Events", process.m_sample_file_names, train.m_all_variables);
+    auto modified_df = df.Define("process_id", [](){})
+  }
   
   TCanvas* c = new TCanvas("c", "c", 600, 600);
   ROOT::RDataFrame df("Events", files, train.m_all_variables);

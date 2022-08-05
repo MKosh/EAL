@@ -4,6 +4,7 @@
   "data": {
       "class": "data",
       "lumi": 1.0,
+      "process_id":1,
       "samples": [
           {"name": "Data", "xs": 1.0, "nMC": 1.0, "nMCneg": 0}
       ]
@@ -12,6 +13,7 @@
   "VBS_EWK": {
     "class": "signal",
     "lumi": 35867.06,
+    "process_id":2,
     "samples": [
       {"name": "WminusTo2JZTo2LJJ_EWK_LO_SM_MJJ100PTJ10_TuneCUETP8M1_13TeV-madgraph-pythia8"      ,"xs": 0.02982, "nMC": 200000.0 , "nMCneg": 0},
       {"name": "ZTo2LZTo2JJJ_EWK_LO_SM_MJJ100PTJ10_TuneCUETP8M1_13TeV-madgraph-pythia8"           , "xs": 0.01589, "nMC": 100000.0 , "nMCneg": 0}
@@ -21,6 +23,7 @@
   "Top": {
     "class": "background",
     "lumi": 35867.06,
+    "process_id":14,
     "samples": [
       {"name": "ST_s-channel_4f_hadronicDecays_TuneCP5_PSweights_13TeV-amcatnlo-pythia8", "xs": 11.24 , "nMC": 54761756.0   , "nMCneg": 0}
     ]
@@ -29,6 +32,7 @@
   "WJets": {
     "class": "background",
     "lumi": 35867.06,
+    "process_id":12,
     "samples": [
         {"name": "WJetsToLNu_HT-70To100_TuneCUETP8M1_13TeV-madgraphMLM-pythia8"   , "xs": 1353.0 , "nMC": 10020533.0, "nMCneg": 0, "kf": 1.21}
     ]
@@ -37,6 +41,7 @@
   "Zjets": {
     "class": "background",
     "lumi": 35867.06,
+    "process_id":13,
     "samples": [
       {"name": "DYJetsToLL_M-50_HT-70to100_TuneCUETP8M1_13TeV-madgraphMLM-pythia8", "xs": 169.9   , "nMC": 9691660.0,  "nMCneg": 0,"kf": 1.23}
     ]

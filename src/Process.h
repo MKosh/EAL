@@ -9,6 +9,12 @@
 using json = nlohmann::json;
 namespace EAL{
 
+enum ClassID {
+  data = 1,
+  signal,
+  background
+};
+
 ////////////////////////////////////////////////////////////////////////////////
 /// 
 class Process {
@@ -17,18 +23,30 @@ public:
   std::string m_process_directory;
   std::vector<std::string> m_sample_file_names;
   std::vector<EAL::Sample> m_samples;
-  std::string m_classification;
+  EAL::ClassID m_classification;
   Float_t m_luminosity;
+  Int_t m_process_id;
 
   Process(json::object_t process_init, std::string process_name, std::string directory) {
     m_process = process_name;
     m_classification = process_init.at("class");
     m_luminosity = process_init.at("lumi");
+    m_process_id = process_init.at("process_id");
 
     if (process_init["process_directory"].is_null())
       m_process_directory = directory;
     else
       m_process_directory = process_init.at("process_directory");
+
+    if (process_init.at("class") == "data") {
+      m_classification = EAL::ClassID::data;
+    } else if (process_init.at("class") == "signal") {
+      m_classification = EAL::ClassID::signal;
+    } else if (process_init.at("class") == "background") {
+      m_classification = EAL::ClassID::background;
+    } else {
+      std::cout << "--- Error setting Class for process: " << m_process << '\n';
+    }
 
     for (const auto& smpl : process_init.at("samples")) {
       m_samples.emplace_back(smpl, m_process_directory);
