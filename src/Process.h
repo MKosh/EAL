@@ -29,7 +29,6 @@ public:
 
   Process(json::object_t process_init, std::string process_name, std::string directory) {
     m_process = process_name;
-    m_classification = process_init.at("class");
     m_luminosity = process_init.at("lumi");
     m_process_id = process_init.at("process_id");
 

@@ -50,9 +50,6 @@ public:
     m_file_name = m_sample_directory + m_sample + ".root";
   }
   
-  Int_t OpenFile(TString file);
-  Int_t SetTree(TString tree);
-  
 };
 
 }

@@ -71,7 +71,9 @@
       "thread": "cpp",
       "valarray": "cpp",
       "hash_map": "cpp",
-      "list": "cpp"
+      "list": "cpp",
+      "set": "cpp",
+      "allocator": "cpp"
     },
     "cmake.configureOnOpen": false
 }
