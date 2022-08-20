@@ -6,7 +6,7 @@
 #include <map>
 #include "Sample.h"
 #include "Process.h"
-#include "../include/nlohmann/json.hpp"
+#include "nlohmann/json.hpp"
 
 using json = nlohmann::json;
 ////////////////////////////////////////////////////////////////////////////////
@@ -17,7 +17,7 @@ private:
   std::string m_common_directory;
   int m_year;
   std::vector<EAL::Process> m_processes;
-  std::map<std::string, int> m_process_IDs;
+  std::unordered_map<std::string, int> m_process_IDs;
   std::vector<std::string> m_analysis_sample_files;
 
 public:

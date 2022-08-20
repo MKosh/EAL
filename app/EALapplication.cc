@@ -4,13 +4,14 @@
 #include <vector>
 #include <map>
 #include <fstream>
-#include <TFile.h>
+#include "TFile.h"
 #include "TObjArray.h"  
 #include "TCanvas.h"
 #include "TTree.h"
 #include "ROOT/RDataFrame.hxx"
 #include "../include/nlohmann/json.hpp"
-#include "../include/EAL/headers.h"
+#include "../EAL/Analysis.h"
+#include "../src/Training.h"
 
 using json = nlohmann::json;
 
@@ -24,73 +25,67 @@ int EALapplication() {
   // Train and apply.
   // Graph the results.
   ROOT::EnableImplicitMT();
-  std::ifstream input_file("data/config/dataset.json");
-  json dataset_list;
-  input_file >> dataset_list;
 
-  std::string common_directory;
-  if (dataset_list.contains("analysis_directory"))
-    common_directory = dataset_list["analysis_directory"];
-  else
-  common_directory = "";
+  auto dataset = EAL::GetJSONContent("data/config/dataset.json");
+  EAL::Analysis anl = EAL::Analysis(dataset);
 
-  //std::vector<EAL::Process>* processes = new std::vector<EAL::Process>;
-  auto processes = std::make_unique<std::vector<EAL::Process>>();
-  std::vector<std::string> files;
-  std::map<std::string, int> process_IDs;
+  auto process_IDs = anl.GetProcessIDs();
+  auto files = anl.GetSampleFileNames();
 
-  for (const auto& proc : dataset_list.items()) {
-    if (!(proc.key() == "analysis_directory")) {
-      processes->emplace_back(proc.value(), proc.key(), common_directory);
-      for (const auto& smpl : (*processes).back().m_sample_file_names) {
-        if (!(proc.key() == "analysis_directory")) {
-          files.emplace_back(smpl);
-        }
-      }
-    }
-  }
-
-  for (const auto& process : *processes) {
-    for (const auto& sample_file : process.m_sample_file_names) {
-      process_IDs[sample_file] = process.m_process_id;
-    }
-  }
-
-  std::cout << '\n';
   TMVATraining train("data/config/TMVA_settings.json");
+  std::cout << "\nAnalysis beginning:\n--- Creating intermediate ROOT files\n";
 
   auto setProcessID = [&process_IDs](unsigned int slot, const ROOT::RDF::RSampleInfo& id){
-    int gid = -999;
+    int pid = -999;
     for (const auto& process : process_IDs) {
-      if (id.Contains(process.first)) { gid = process.second; }
+      if (id.Contains(process.first)) { pid = process.second; }
     }
-    return gid;
+    return pid;
   };
 
-  auto setSampleYear = [&process_IDs](unsigned int slot, const ROOT::RDF::RSampleInfo& id){
-    int gid = -999;
-    for (const auto& process : process_IDs) {
-      if (id.Contains(process.first)) { gid = process.second; }
-    }
-    return gid;
+   auto setSampleYear = [](unsigned int slot, const ROOT::RDF::RSampleInfo& id){
+    if (id.Contains("2016")) { return 2016; }
+    if (id.Contains("2017")) { return 2017; }
+    if (id.Contains("2018")) { return 2018; }
+    return 0;
   };
+
+  auto setSampleLumin = [&anl](unsigned int slot, const ROOT::RDF::RSampleInfo& id){
+    for (const auto& smpl : anl.GetAnalysisSamples()) {
+      if (id.Contains(smpl.m_file_name)) return smpl.m_luminosity; 
+    }
+    return -999.0f;
+  };
+
+  auto setSampleWeight = [&anl](unsigned int slot, const ROOT::RDF::RSampleInfo& id){
+    for (const auto& smpl : anl.GetAnalysisSamples()) {
+      if (id.Contains(smpl.m_file_name)) {
+        //std::cout << "sample: " << smpl.m_sample << "\nWeight: " << smpl.m_sample_weight <<'\n';
+        return smpl.m_sample_weight; 
+      }
+    }
+    return -999.0f;
+  };
+
+  auto tau21_cut = [](Float_t tau21){ return (tau21 >= 0.0 && tau21 <= 1.0); };
+  auto qgid_cut = [](Float_t qgid1, Float_t qgid2){ return ((qgid1 >= 0.0 && qgid1 <= 1.0)
+    &&(qgid2 >= 0.0 && qgid2 <= 1.0)); };
+  auto wv_boosted = [](Float_t lep2_pt, Float_t bos_PuppiAK8_pt) { return (lep2_pt<0 && bos_PuppiAK8_pt>0); };
   
   ROOT::RDataFrame df("Events", files, train.m_all_variables);
-  auto modified_df = df.DefinePerSample("gid", setProcessID)
-                        .DefinePerSample("lumin", [](unsigned int slot, const ROOT::RDF::RSampleInfo& id){return id.Contains("Data") ? 1. : 2.;})
-                        .DefinePerSample("sid", [](unsigned int slot, const ROOT::RDF::RSampleInfo& id){return 2;})
-                        .DefinePerSample("year", [](unsigned int slot, const ROOT::RDF::RSampleInfo& id){return 2016;})
-                        .DefinePerSample("mcWeight", [](unsigned int slot, const ROOT::RDF::RSampleInfo& id){return 1.;});
-  modified_df.Snapshot("events", "intermediate.root", train.m_all_variables);
+  auto modified_df = df.DefinePerSample("process_id", setProcessID)
+                        .DefinePerSample("lumin", setSampleLumin)
+                        .DefinePerSample("year", setSampleYear)
+                        .DefinePerSample("mcWeight", setSampleWeight)
+                        .Filter(tau21_cut, {"bos_PuppiAK8_tau2tau1"}, "tau21_cut")
+                        .Filter(qgid_cut, {"vbf1_AK4_qgid","vbf2_AK4_qgid"}, "qgid_cut")
+                        .Filter(wv_boosted, {"lep2_pt", "bos_PuppiAK8_pt"}, "wv_boosted")
+                        .Snapshot("events", "intermediate2.root", train.m_all_variables);
 
-  //TCanvas* c = new TCanvas("c", "c", 600, 600);
-  //auto h = modified_df.Histo1D("lumin");
-  //h->Draw();
-  //c->Print("df_plot.pdf");
-  //c->Close();
   
-
-  std::cout << "done\n";
+  
+   
+  std::cout << "---Done!\n";
   return 0;
 }
 

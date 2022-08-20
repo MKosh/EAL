@@ -10,9 +10,9 @@ using json = nlohmann::json;
 namespace EAL{
 
 enum ClassID {
-  data = 1,
-  signal,
-  background
+  kData = 1,
+  kSignal,
+  kBackground
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -38,11 +38,11 @@ public:
       m_process_directory = process_init.at("process_directory");
 
     if (process_init.at("class") == "data") {
-      m_classification = EAL::ClassID::data;
+      m_classification = EAL::ClassID::kData;
     } else if (process_init.at("class") == "signal") {
-      m_classification = EAL::ClassID::signal;
+      m_classification = EAL::ClassID::kSignal;
     } else if (process_init.at("class") == "background") {
-      m_classification = EAL::ClassID::background;
+      m_classification = EAL::ClassID::kBackground;
     } else {
       std::cout << "--- Error setting Class for process: " << m_process << '\n';
     }

@@ -5,8 +5,9 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/src",
+                "${workspaceFolder}/include",
                 "/usr/local/include/",
-                "~/packages/root/include/",
+                "~/packages/root/include",
                 "~/packages/root/lib",
                 "~/packages/root/root/include"
             ],

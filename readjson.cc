@@ -9,10 +9,16 @@ void readjson() {
   json dataset_list;
   input_file >> dataset_list;
 
-  std::cout << dataset_list.at("analysis").at("directory") << '\n';
-  for (const auto& thing : dataset_list.at("analysis").items()) {
-    std::cout << thing.key() << '\n';
+  for (const auto& lumi : dataset_list.at("analysis").at("luminosities").items()) {
+    std::cout << "year = " << lumi.key() << ", lumi = " << lumi.value() << '\n';
   }
+  for (const auto& things : dataset_list.at("processes").items()) {
+    std::cout << "\nProcess " << things.key() << " : \n";
+    for (const auto& thing : things.value().at("samples").items()) {
+      std::cout << "ngen " << static_cast<long>(thing.value().at("nMC")) + static_cast<long>(thing.value().at("nMCneg")) << '\n';
+    }
+  }
+
 }
 
 int main() {

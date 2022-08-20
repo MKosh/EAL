@@ -16,7 +16,7 @@
 #include "TSystem.h"
 #include "TROOT.h"
 
-#include "../include/nlohmann/json.hpp"
+#include "nlohmann/json.hpp"
 
 using json = nlohmann::json;
 
