@@ -1,3 +1,4 @@
+/** @cond */
 #include <iostream>
 #include <ranges>
 #include <memory>
@@ -11,8 +12,9 @@
 #include "ROOT/RDataFrame.hxx"
 #include "../include/nlohmann/json.hpp"
 #include "../EAL/Analysis.h"
-#include "../src/Training.h"
-
+#include "../EAL/Training.h"
+#include "../EAL/Functions.h"
+/** @endcond */
 using json = nlohmann::json;
 
 int EALapplication() {
@@ -67,24 +69,20 @@ int EALapplication() {
     return -999.0f;
   };
 
-  auto tau21_cut = [](Float_t tau21){ return (tau21 >= 0.0 && tau21 <= 1.0); };
-  auto qgid_cut = [](Float_t qgid1, Float_t qgid2){ return ((qgid1 >= 0.0 && qgid1 <= 1.0)
-    &&(qgid2 >= 0.0 && qgid2 <= 1.0)); };
-  auto wv_boosted = [](Float_t lep2_pt, Float_t bos_PuppiAK8_pt) { return (lep2_pt<0 && bos_PuppiAK8_pt>0); };
-  
+  EAL::tau21_cut cut1;
+  EAL::qgid_cut cut2;
+  EAL::wv_boosted cut3;
+
   ROOT::RDataFrame df("Events", files, train.m_all_variables);
   auto modified_df = df.DefinePerSample("process_id", setProcessID)
                         .DefinePerSample("lumin", setSampleLumin)
                         .DefinePerSample("year", setSampleYear)
                         .DefinePerSample("mcWeight", setSampleWeight)
-                        .Filter(tau21_cut, {"bos_PuppiAK8_tau2tau1"}, "tau21_cut")
-                        .Filter(qgid_cut, {"vbf1_AK4_qgid","vbf2_AK4_qgid"}, "qgid_cut")
-                        .Filter(wv_boosted, {"lep2_pt", "bos_PuppiAK8_pt"}, "wv_boosted")
-                        .Snapshot("events", "intermediate2.root", train.m_all_variables);
+                        .Filter(cut1, {"bos_PuppiAK8_tau2tau1"}, "tau21_cut")
+                        .Filter(cut2, {"vbf1_AK4_qgid","vbf2_AK4_qgid"}, "qgid_cut")
+                        .Filter(cut3, {"lep2_pt", "bos_PuppiAK8_pt"}, "wv_boosted")
+                        .Snapshot("events", "intermediate.root", train.m_all_variables);
 
-  
-  
-   
   std::cout << "---Done!\n";
   return 0;
 }

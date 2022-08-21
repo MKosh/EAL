@@ -1,11 +1,13 @@
 #pragma once
-
+/** @cond */
 #include <vector>
 #include <string>
 #include <fstream>
+#include <iostream>
 #include <unordered_map>
+#include "Rtypes.h"
 #include "nlohmann/json.hpp"
-
+/** @endcond */
 using json = nlohmann::json;
 ////////////////////////////////////////////////////////////////////////////////
 /// 
@@ -100,11 +102,6 @@ public:
   auto GetProcessIDs()  {return m_process_IDs; }
 };
 
-json GetJSONContent(std::string file_name) {
-  std::ifstream input_file(file_name);
-  json file_content;
-  input_file >> file_content;
-  return file_content;
-}
+json GetJSONContent(std::string file_name);
 
 }
