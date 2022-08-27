@@ -14,6 +14,7 @@ using json = nlohmann::json;
 namespace EAL {
 
 enum ClassID {
+  kUnknown = -999,
   kData = 1,
   kSignal,
   kBackground
@@ -25,10 +26,10 @@ public:
   std::string m_sample; // Sample (file) name
   std::string m_sample_directory; // File location // Optional
   std::string m_year;
-  Long_t m_num_events; // Number of Events in the file
-  Long_t m_nMC_events; // Number of generated Monte Carlo events
-  Long_t m_nMC_neg_events; // Number of negative Monte Carlo events
-  Long_t m_ngen; // Total events generated (nMCgen - 2 * nMCgen_neg)
+  int64_t m_num_events; // Number of Events in the file
+  int64_t m_nMC_events; // Number of generated Monte Carlo events
+  int64_t m_nMC_neg_events; // Number of negative Monte Carlo events
+  int64_t m_ngen; // Total events generated (nMCgen - 2 * nMCgen_neg)
   Float_t m_xsec; // Cross section
   Float_t m_sample_weight; // xsec/ngen
   Float_t m_luminosity;
@@ -80,6 +81,7 @@ private:
   std::vector<EAL::Sample> m_samples;
   std::unordered_map<std::string, Int_t> m_process_IDs;
   std::vector<std::string> m_analysis_sample_files;
+  std::unordered_map<std::string, int32_t> m_class_IDs;
 
 public:
   Analysis(json dataset_json) {
@@ -89,9 +91,11 @@ public:
     for (const auto& proc : dataset_json.at("processes").items()) {
       EAL::Process temp_proc{proc.key(), proc.value()};
       m_processes.insert({proc.key(), temp_proc});
+      //m_class_IDs.insert({proc.key(), temp_proc.m_classification});
       for (const auto& smpl : proc.value().at("samples").items()) {
         m_samples.emplace_back(smpl.value(), dataset_json.at("analysis").at("directory"));
         m_process_IDs[m_samples.back().m_file_name] = proc.value().at("process_id");
+        m_class_IDs.insert({m_samples.back().m_file_name, static_cast<int32_t>(temp_proc.m_classification)});
         m_analysis_sample_files.emplace_back(m_samples.back().m_file_name);
       }
     }
@@ -99,7 +103,8 @@ public:
 
   auto GetAnalysisSamples() { return m_samples; }
   auto GetSampleFileNames() {return m_analysis_sample_files; }
-  auto GetProcessIDs()  {return m_process_IDs; }
+  auto GetProcessIDs() { return m_process_IDs; }
+  auto GetClassIDs() { return m_class_IDs; }
 };
 
 json GetJSONContent(std::string file_name);

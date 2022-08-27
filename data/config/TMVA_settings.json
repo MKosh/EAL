@@ -81,6 +81,7 @@
     {"name": "vbf2_AK4_pt"},
     {"name": "vbf_phi"},
     {"name": "vbf_pt"},
-    {"name": "year"}
+    {"name": "year"},
+    {"name": "class_id"}
   ]
 }
