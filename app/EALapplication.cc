@@ -98,6 +98,8 @@ int EALapplication() {
   EAL::Cut::SignalOnly signal_cut;
   EAL::Cut::BackgroundOnly background_cut;
 
+  ROOT::RDF::RSnapshotOptions opts;
+  opts.fMode = "RECREATE";
 
   ROOT::RDataFrame df("Events", files, train.m_all_variables);
   auto modified_df = df.DefinePerSample("process_id", SetProcessID)
@@ -121,17 +123,70 @@ int EALapplication() {
                         .Filter(iso_cut, {"AntiIsoInt", "bosCent"}, "isolation")
                         .Filter(zepp_lep_cut, {"zeppLep", "vbf_deta"}, "zepp_lep")
                         .Filter(zepp_had_cut, {"zeppHad", "vbf_deta"}, "zepp_had")
-                        .Filter(wv_sr_cut, {"bos_PuppiAK8_m_sd0"}, "wv_sr");
-                        //.Snapshot("events", "intermediate3.root", train.m_all_variables);
+                        .Filter(wv_sr_cut, {"bos_PuppiAK8_m_sd0"}, "wv_sr")
+                        .Filter(data_cut, {"class_id"})
+                        .Snapshot("data", "intermediate3.root", train.m_all_variables, opts);
   std::cout << "   filtering dataframes\n";
-  ROOT::RDF::RSnapshotOptions opts;
-  opts.fMode = "RECREATE";
+
 
   std::cout << "   Writing dataframes\n";
-  auto data_df = modified_df.Filter(data_cut, {"class_id"}).Snapshot("data", "intermediate3.root", train.m_all_variables, opts);
+  //auto data_df = modified_df.Filter(data_cut, {"class_id"}).Snapshot("data", "intermediate3.root", train.m_all_variables, opts);
   opts.fMode = "UPDATE";
-  auto signal_df = modified_df.Filter(signal_cut, {"class_id"}).Snapshot("signal", "intermediate3.root", train.m_all_variables, opts);
-  auto background_df = modified_df.Filter(background_cut, {"class_id"}).Snapshot("background", "intermediate3.root", train.m_all_variables, opts);
+  
+  ROOT::RDataFrame df2("Events", files, train.m_all_variables);
+  auto signal_df = df.DefinePerSample("process_id", SetProcessID)
+                        .DefinePerSample("lumin", SetSampleLumin)
+                        .DefinePerSample("year", SetSampleYear)
+                        .DefinePerSample("mcWeight", SetSampleWeight)
+                        .DefinePerSample("class_id", SetSampleClass)
+                        .Filter(tau21_cut, {"bos_PuppiAK8_tau2tau1"}, "tau21_cut")
+                        .Filter(qgid_cut, {"vbf1_AK4_qgid","vbf2_AK4_qgid"}, "qgid_cut")
+                        .Filter(wv_boosted_cut, {"lep2_pt", "bos_PuppiAK8_pt"}, "wv_boosted")
+                        .Filter(lep_pt_cut, {"lep1_pt"}, "lep_pt")
+                        .Filter(lep_eta_cut, {"lep1_m", "lep1_eta"}, "lep_eta")
+                        .Filter(fatjet_pt_cut, {"bos_PuppiAK8_pt"}, "fatjet_pt")
+                        .Filter(fatjet_eta_cut, {"bos_PuppiAK8_eta"}, "fatjet_eta")
+                        .Filter(fatjet_tau21_cut, {"bos_PuppiAK8_tau2tau1"}, "fatjet_tau21")
+                        .Filter(vbs_jets_mjj_cut, {"vbf_m"}, "vbs_jets_mjj")
+                        .Filter(vbs_jets_pt_cut, {"vbf1_AK4_pt", "vbf2_AK4_pt"}, "vbs_jets_pt")
+                        .Filter(vbs_deta_cut, {"vbf_deta"}, "vbs_deta")
+                        .Filter(met_pt_cut, {"MET"}, "met_pt")
+                        .Filter(btag_veto_cut, {"nBtag_loose"}, "btag_veto")
+                        .Filter(iso_cut, {"AntiIsoInt", "bosCent"}, "isolation")
+                        .Filter(zepp_lep_cut, {"zeppLep", "vbf_deta"}, "zepp_lep")
+                        .Filter(zepp_had_cut, {"zeppHad", "vbf_deta"}, "zepp_had")
+                        .Filter(wv_sr_cut, {"bos_PuppiAK8_m_sd0"}, "wv_sr")
+                        .Filter(signal_cut, {"class_id"})
+                        .Snapshot("signal", "intermediate3.root", train.m_all_variables, opts);
+  //auto signal_df = modified_df.Filter(signal_cut, {"class_id"}).Snapshot("signal", "intermediate3.root", train.m_all_variables, opts);
+  
+  ROOT::RDataFrame df3("Events", files, train.m_all_variables);
+  auto background_df = df.DefinePerSample("process_id", SetProcessID)
+                        .DefinePerSample("lumin", SetSampleLumin)
+                        .DefinePerSample("year", SetSampleYear)
+                        .DefinePerSample("mcWeight", SetSampleWeight)
+                        .DefinePerSample("class_id", SetSampleClass)
+                        .Filter(tau21_cut, {"bos_PuppiAK8_tau2tau1"}, "tau21_cut")
+                        .Filter(qgid_cut, {"vbf1_AK4_qgid","vbf2_AK4_qgid"}, "qgid_cut")
+                        .Filter(wv_boosted_cut, {"lep2_pt", "bos_PuppiAK8_pt"}, "wv_boosted")
+                        .Filter(lep_pt_cut, {"lep1_pt"}, "lep_pt")
+                        .Filter(lep_eta_cut, {"lep1_m", "lep1_eta"}, "lep_eta")
+                        .Filter(fatjet_pt_cut, {"bos_PuppiAK8_pt"}, "fatjet_pt")
+                        .Filter(fatjet_eta_cut, {"bos_PuppiAK8_eta"}, "fatjet_eta")
+                        .Filter(fatjet_tau21_cut, {"bos_PuppiAK8_tau2tau1"}, "fatjet_tau21")
+                        .Filter(vbs_jets_mjj_cut, {"vbf_m"}, "vbs_jets_mjj")
+                        .Filter(vbs_jets_pt_cut, {"vbf1_AK4_pt", "vbf2_AK4_pt"}, "vbs_jets_pt")
+                        .Filter(vbs_deta_cut, {"vbf_deta"}, "vbs_deta")
+                        .Filter(met_pt_cut, {"MET"}, "met_pt")
+                        .Filter(btag_veto_cut, {"nBtag_loose"}, "btag_veto")
+                        .Filter(iso_cut, {"AntiIsoInt", "bosCent"}, "isolation")
+                        .Filter(zepp_lep_cut, {"zeppLep", "vbf_deta"}, "zepp_lep")
+                        .Filter(zepp_had_cut, {"zeppHad", "vbf_deta"}, "zepp_had")
+                        .Filter(wv_sr_cut, {"bos_PuppiAK8_m_sd0"}, "wv_sr")
+                        .Filter(background_cut, {"class_id"})
+                        .Snapshot("background", "intermediate3.root", train.m_all_variables, opts);
+  
+  //auto background_df = modified_df.Filter(background_cut, {"class_id"}).Snapshot("background", "intermediate3.root", train.m_all_variables, opts);
 
   std::cout << "---Done!\n";
   return 0;
