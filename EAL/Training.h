@@ -19,6 +19,8 @@
 #include "nlohmann/json.hpp"
 
 using json = nlohmann::json;
+namespace EAL {
+namespace ML {
 
 class TMVAMethod {
 public:
@@ -70,3 +72,5 @@ public:
 
 
 };
+}
+}

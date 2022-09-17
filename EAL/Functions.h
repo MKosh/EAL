@@ -197,24 +197,126 @@ public:
     return class_id == static_cast<int32_t>(EAL::ClassID::kBackground);
   }
 };
-/*
-class FullWVSignalRegion {
+
+struct CutList {
+  EAL::Cut::Tau21 tau21_cut;
+  EAL::Cut::QGid qgid_cut;
+  EAL::Cut::WVBoosted wv_boosted_cut;
+  EAL::Cut::LepPt lep_pt_cut;
+  EAL::Cut::LepEta lep_eta_cut;
+  EAL::Cut::FatjetPt fatjet_pt_cut;
+  EAL::Cut::FatjetEta fatjet_eta_cut;
+  EAL::Cut::FatjetTau21 fatjet_tau21_cut;
+  EAL::Cut::VBSJetsMjj vbs_jets_mjj_cut;
+  EAL::Cut::VBSJetsPt vbs_jets_pt_cut;
+  EAL::Cut::VBSDeltaEta vbs_deta_cut;
+  EAL::Cut::METpt met_pt_cut;
+  EAL::Cut::bTagVeto btag_veto_cut;
+  EAL::Cut::Isolation iso_cut;
+  EAL::Cut::ZeppLep zepp_lep_cut;
+  EAL::Cut::ZeppHad zepp_had_cut;
+  EAL::Cut::WVSignalRegion wv_sr_cut;
+};
+
+class SetProcessID {
+private:
+  const std::unordered_map<std::string, Int_t> m_process_IDs;
 public:
-  EAL::Cut::WVSignalRegion wv_sr;
-  EAL::Cut::WVBoosted wv_boosted;
-  auto operator()(float bos_PuppiAK8_m, float lep2_pt, float bos_PuppiAK8_pt) {
-    return wv_sr(bos_PuppiAK8_m) && wv_boosted(lep2_pt, bos_PuppiAK8_pt);
+  SetProcessID(std::unordered_map<std::string, Int_t> IDs) :
+    m_process_IDs{IDs} {}
+
+  auto operator()(unsigned int slot, const ROOT::RDF::RSampleInfo& id) {
+    int32_t pid = -999;
+    for (const auto& process : m_process_IDs) {
+      if (id.Contains(process.first)) { pid = process.second; }
+    }
+    return pid;
   }
 };
-*/
-/*
-  auto tau21_cut = [](Float_t tau21){ return (tau21 >= 0.0 && tau21 <= 1.0); };
-  auto qgid_cut = [](Float_t qgid1, Float_t qgid2){ return ((qgid1 >= 0.0 && qgid1 <= 1.0)&&(qgid2 >= 0.0 && qgid2 <= 1.0)); };
-  auto wv_boosted = [](Float_t lep2_pt, Float_t bos_PuppiAK8_pt) { return (lep2_pt<0 && bos_PuppiAK8_pt>0); };
-  auto year_2016 = [](int year){ return year==2016; };
-  auto year_2017 = [](int year){ return year==2017; };
-  auto year_2018 = [](int year){ return year==2018; };
-  auto lepton_pt = [](Float_t lep_pt){ return lep_pt>25; };
-*/
+
+class SetSampleYear {
+private:
+  //std::string m_dataframe_class;
+  //bool debugging;
+public:
+  auto operator()(unsigned int slot, const ROOT::RDF::RSampleInfo& id) {
+    //if (debugging) std::cout << "Processing " << m_dataframe_class << " dataframe\n--- " << id.AsString() << "\n\n";
+    if (id.Contains("2016")) { return 2016; }
+    if (id.Contains("2017")) { return 2017; }
+    if (id.Contains("2018")) { return 2018; }
+    return 0;
+  }
+};
+
+class SetSampleLumi {
+private:
+  std::vector<EAL::Sample> m_samples;
+  std::unordered_map<std::string, int32_t> m_class_IDs;
+
+public:
+  SetSampleLumi(std::vector<EAL::Sample> samples, std::unordered_map<std::string, int32_t> IDs) :
+                m_samples{samples}, m_class_IDs{IDs} {}
+
+  auto operator()(unsigned int slot, const ROOT::RDF::RSampleInfo& id) {
+    for (const auto& smpl : m_samples) {
+      if (id.Contains(smpl.m_file_name) && m_class_IDs.at(smpl.m_file_name) 
+        != static_cast<int32_t>(EAL::ClassID::kData)) { 
+        return smpl.m_luminosity;
+      }
+      else if (id.Contains(smpl.m_file_name) && m_class_IDs.at(smpl.m_file_name) 
+        == static_cast<int32_t>(EAL::ClassID::kData)) { 
+        return 1.0f;
+      }
+    }
+    return -999.0f;
+  }
+};
+
+class SetSampleWeight {
+private:
+  std::vector<EAL::Sample> m_samples;
+public:
+  SetSampleWeight(std::vector<EAL::Sample> samples) : m_samples{samples} {}
+
+  auto operator()(unsigned int slot, const ROOT::RDF::RSampleInfo& id) {
+    for (const auto& smpl : m_samples) {
+      if (id.Contains(smpl.m_file_name)) { return smpl.m_sample_weight; }
+    }
+    return -999.0f;
+  }
+};
+
+class SetSampleClass {
+private:
+  std::unordered_map<std::string, int32_t> m_class_IDs;
+public:
+  SetSampleClass(std::unordered_map<std::string, int32_t> class_IDs) : 
+    m_class_IDs{class_IDs} {}
+
+  auto operator()(unsigned int slot, const ROOT::RDF::RSampleInfo& id) {
+    for (const auto& classes : m_class_IDs) {
+      if (id.Contains(classes.first)) { return classes.second; }
+    }
+    return -999;
+  }
+};
+
+struct DefinesList {
+  EAL::Cut::SetProcessID set_process_ids;
+  EAL::Cut::SetSampleClass set_sample_class;
+  EAL::Cut::SetSampleYear set_sample_year;
+  EAL::Cut::SetSampleLumi set_sample_lumi;
+  EAL::Cut::SetSampleWeight set_sample_weight;
+
+  DefinesList(const std::unordered_map<std::string, Int_t>& process_IDs,
+              const std::unordered_map<std::string, int32_t>& class_IDs,
+              const std::vector<EAL::Sample>& samples) :
+    set_process_ids{process_IDs},
+    set_sample_class{class_IDs},
+    set_sample_year{},
+    set_sample_lumi{samples, class_IDs},
+    set_sample_weight{samples} {}
+};
+
 }
 }

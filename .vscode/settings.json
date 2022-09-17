@@ -75,5 +75,20 @@
       "set": "cpp",
       "allocator": "cpp"
     },
-    "cmake.configureOnOpen": false
+    "cmake.configureOnOpen": false,
+    "cSpell.words": [
+      "amcatnlo",
+      "antitop",
+      "CUETP",
+      "dataframe",
+      "Diboson",
+      "lumi",
+      "madgraph",
+      "ntuples",
+      "powheg",
+      "Wjets",
+      "Wminus",
+      "Wplus",
+      "Zjets"
+    ]
 }

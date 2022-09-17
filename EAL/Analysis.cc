@@ -13,4 +13,16 @@ json GetJSONContent(std::string file_name) {
   return file_content;
 }
 
+
+std::vector<std::string> Analysis::GetFileNames(EAL::ClassID class_id) {
+  std::vector<std::string> smpls;
+  for (const auto& sample : m_samples) {
+    if (m_class_IDs.at(sample.m_file_name) == static_cast<int32_t>(class_id)) {
+      smpls.emplace_back(sample.m_file_name);
+    }
+  }
+  return smpls;
+}
+
+
 }

@@ -61,7 +61,7 @@
     {"name": "lep2_phi"},
     {"name": "lep2_pt"},
     {"name": "lep2_trigEffWeight"},
-    {"name": "lumin"},
+    {"name": "lumi"},
     {"name": "mcWeight"},
     {"name": "MET"},
     {"name": "MET_phi"},
