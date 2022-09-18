@@ -5,20 +5,12 @@
 using json = nlohmann::json;
 
 void readjson() {
-  std::ifstream input_file("data/config/dataset.json");
+  std::ifstream input_file("data/config/TMVA_settings.json");
   json dataset_list;
   input_file >> dataset_list;
 
-  for (const auto& lumi : dataset_list.at("analysis").at("luminosities").items()) {
-    std::cout << "year = " << lumi.key() << ", lumi = " << lumi.value() << '\n';
-  }
-  for (const auto& things : dataset_list.at("processes").items()) {
-    std::cout << "\nProcess " << things.key() << " : \n";
-    for (const auto& thing : things.value().at("samples").items()) {
-      std::cout << "ngen " << static_cast<long>(thing.value().at("nMC")) + static_cast<long>(thing.value().at("nMCneg")) << '\n';
-    }
-  }
-
+  std::cout << "Analysis has " << dataset_list.at("variables").size() << " variables\n";
+  std::cout << " and " << dataset_list.at("spectators").size() << " spectators\n";
 }
 
 int main() {

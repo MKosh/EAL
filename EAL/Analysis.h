@@ -3,15 +3,34 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <map>
 #include <iostream>
 #include <unordered_map>
 #include "Rtypes.h"
 #include "nlohmann/json.hpp"
+#include "./Training.h"
 /** @endcond */
 using json = nlohmann::json;
 ////////////////////////////////////////////////////////////////////////////////
 /// 
 namespace EAL {
+
+struct EventHolder {
+  std::unordered_map<std::string,float> variables_f;
+  std::unordered_map<std::string,int32_t> variables_i;
+
+  EventHolder(EAL::ML::TMVATraining train) {
+    for (const auto& vars : train.m_training_variables) {
+      if (train.m_variable_types.at(vars) == "F") { variables_f[vars] = 0.0f; }
+      else if (train.m_variable_types.at(vars) == "I") { variables_i[vars] = 0; }
+    }
+    for (const auto& spec : train.m_training_spectators) {
+      if (train.m_variable_types.at(spec) == "F") { variables_f[spec] = 0.0f; }
+      else if (train.m_variable_types.at(spec) == "I") { variables_i[spec] = 0; }
+    }
+  }
+
+};
 
 enum ClassID {
   kUnknown = -999,

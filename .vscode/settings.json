@@ -73,7 +73,9 @@
       "hash_map": "cpp",
       "list": "cpp",
       "set": "cpp",
-      "allocator": "cpp"
+      "allocator": "cpp",
+      "TMVAClassification_BDT.class.C": "cpp",
+      "TMVAClassification_DNN_GPU.class.C": "cpp"
     },
     "cmake.configureOnOpen": false,
     "cSpell.words": [

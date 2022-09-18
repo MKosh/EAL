@@ -1,3 +1,4 @@
+#pragma once
 #include <vector>
 #include <iostream>
 #include <string>
@@ -7,6 +8,7 @@
 #include "TMVA/DataLoader.h"
 #include "TMVA/Tools.h"
 #include "TMVA/TMVAGui.h"
+#include "TMVA/Reader.h"
 
 #include "TChain.h"
 #include "TFile.h"
@@ -22,6 +24,19 @@ using json = nlohmann::json;
 namespace EAL {
 namespace ML {
 
+/*
+class EvaluateMethod {
+private:
+  //std::vector<float> m_inputs;
+  TMVA::Reader m_reader;
+public:
+  EvaluateMethod(TMVA::Reader reader) : m_reader{reader} {}
+
+  auto operator()(std::vector<float> inputs){
+    m_reader->EvaluateMVA(inputs, "BDT method");
+  }
+};
+*/
 class TMVAMethod {
 public:
   std::string m_name;
@@ -45,6 +60,7 @@ public:
   std::vector<std::string> m_training_spectators;
   std::vector<std::string> m_all_variables; // training variables and spectators
   std::unordered_map<std::string, std::string> m_variable_types;
+  std::string m_outfile_name = "TMVAoutput.root";
 
   TMVATraining(std::string settings_file) {
     std::ifstream TMVA_settings(settings_file);

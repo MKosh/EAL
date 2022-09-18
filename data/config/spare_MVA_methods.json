@@ -1,0 +1,1 @@
+{"name":"DNN_GPU", "Types":"kDL", "options":"!H:V:ErrorStrategy=CROSSENTROPY:VarTransform=N:WeightInitialization=XAVIERUNIFORM:Layout=RELU|256,LINEAR::Architecture=GPU"}
