@@ -19,6 +19,7 @@
 #include "TMVA/TMVAGui.h"
 #include "TMVA/Reader.h"
 #include "ROOT/RDataFrame.hxx"
+#include "ROOT/RDFHelpers.hxx"
 #include "../include/nlohmann/json.hpp"
 #include "../EAL/Analysis.h"
 #include "../EAL/Training.h"
@@ -166,67 +167,40 @@ std::cout << "debug 4\n";
       reader->BookMVA(method.m_name, "TMVAoutput/weights/TMVAClassification_DNN_GPU.weights.xml");
     }
   }
+  std::cout << "EAL : reader methods booked\n    :\n";
 
-
-  auto EvaluateMethod = [&reader](float a, float b, float c, float d, float e,
+  auto EvaluateMethods = [&reader](float a, float b, float c, float d, float e,
                                   float f, float g, float h, float i, float j,
                                   float k, float l, float m, float n, float o){
     //std::vector<float> input{l, b, n, d, g, e, f, h, j, i, o, m, a, c, k};                   
     std::vector<float> inputs{a, b, c, d, e, f, g, h, i, j, k, l, m, n, o};
     return reader->EvaluateMVA(inputs, "BDT");
   };
+  auto evalMethod = [&reader](std::vector<float> args) {
+    return reader->EvaluateMVA(args, "BDT");
+  };
 
-  //ROOT::RDF::RSnapshotOptions opts;
+  EAL::ML::Something something;
+  EAL::ML::EvaluateMethod evaluate{reader.get()};
+
+  std::cout << "EAL : evaluation object constructed\n    :\n";
+  ROOT::RDF::RSnapshotOptions opts;
   //opts.fMode = "RECREATE";
-  //opts.fOverwriteIfExists = true;
-
-  std::cout << "debug 6\n";
+  opts.fOverwriteIfExists = true;
+  std::vector<std::string> allvars{train.m_training_variables};
+  allvars.push_back("BDT_response");
+  std::cout << "EAL : Applying Model\n    :\n";
   ROOT::RDataFrame df("data", "intermediate.root");
-  df.Define("BDT_response", EvaluateMethod, train.m_training_variables)
-    .Snapshot("data", "TMVAapplied.root");
+  float a{}, b{}, c{}, d{}, e{}, f{}, g{}, h{}, i{}, j{}, k{}, l{}, m{}, n{}, o{};
 
+  //float output = evaluate(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
+  //std::cout << " output " << output << '\n';
+
+  df.Define("BDT_response", ROOT::Internal::RDF::PassAsVec<15, float>(evalMethod), train.m_training_variables)
+    .Snapshot("data", "TMVAapplied2.root", allvars, opts);
+  std::cout << "EAL : Dataframe saved\n    :\n";
   //ROOT::RDataFrame df2("signal")
-  std::cout << "debug 7\n";
 
-/*
-  auto outfile = TFile::Open("TMVAoutput.root", "UPDATE");
-  auto theTree = outfile->Get<TTree>("data");
-
-  float bos_PuppiAK8_eta, bos_PuppiAK8_m_sd0_corr, bos_PuppiAK8_tau2tau1,
-        dibos_m, lep1_eta, nJet30f, vbf1_AK4_eta, vbf1_AK4_qgid, vbf2_AK4_eta,
-        vbf2_AK4_qgid, vbf_deta, vbf_eta, vbf_m, zeppHad, zeppLep;
-
-  float BDT = 1.0;
-  TBranch* bBDT(0);
-  bBDT = theTree->Branch("BDT", &BDT);
-
-  theTree->SetBranchAddress("bos_PuppiAK8_eta", &bos_PuppiAK8_eta);
-  theTree->SetBranchAddress("bos_PuppiAK8_m_sd0_corr", &bos_PuppiAK8_m_sd0_corr);
-  theTree->SetBranchAddress("bos_PuppiAK8_tau2tau1", &bos_PuppiAK8_tau2tau1);
-  theTree->SetBranchAddress("dibos_m", &dibos_m);
-  theTree->SetBranchAddress("lep1_eta", &lep1_eta);
-  theTree->SetBranchAddress("nJet30f", &nJet30f);
-  theTree->SetBranchAddress("vbf1_AK4_eta", &vbf1_AK4_eta);
-  theTree->SetBranchAddress("vbf1_AK4_qgid", &vbf1_AK4_qgid);
-  theTree->SetBranchAddress("vbf2_AK4_eta", &vbf2_AK4_eta);
-  theTree->SetBranchAddress("vbf2_AK4_qgid", &vbf2_AK4_qgid);
-  theTree->SetBranchAddress("vbf_deta", &vbf_deta);
-  theTree->SetBranchAddress("vbf_eta", &vbf_eta);
-  theTree->SetBranchAddress("vbf_m", &vbf_m);
-  theTree->SetBranchAddress("zeppHad", &zeppHad);
-  theTree->SetBranchAddress("zeppLep", &zeppLep);
-
-  for (int64_t ievt = 0; ievt<theTree->GetEntries(); ievt++){
-    theTree->GetEntry(ievt);
-    if (ievt%1000 == 0) std::cout << "processing event" << ievt << "\n";
-    BDT = reader->EvaluateMVA("BDT");
-    if (ievt%1000 == 0) std::cout << "BDT response = " << BDT << "\n";
-    bBDT->Fill();
-
-  }
-  theTree->Write();
-  outfile->Close();
-  */
 }
 
 int EALapplication() {
@@ -271,17 +245,17 @@ int EALapplication() {
   std::string input_file = "TMVAoutput.root";
   std::string intermediate_file = "intermediate.root";
   std::string output_file = "TMVAoutput.root";
-  std::unique_ptr<TFile> out_file(TFile::Open(output_file.c_str(), "RECREATE"));
-  CreateIntermediateRootFiles(defines, df_cuts, data_cut, signal_cut, background_cut, data_files, signal_files, background_files, train, intermediate_file);
+  //std::unique_ptr<TFile> out_file(TFile::Open(output_file.c_str(), "RECREATE"));
+  //CreateIntermediateRootFiles(defines, df_cuts, data_cut, signal_cut, background_cut, data_files, signal_files, background_files, train, intermediate_file);
   
-  auto data_loader = LoadData(train, intermediate_file);
+  //auto data_loader = LoadData(train, intermediate_file);
 
-  auto factory = CreateTMVAFactory(data_loader.get(), train, out_file.get());
+  //auto factory = CreateTMVAFactory(data_loader.get(), train, out_file.get());
 
-  factory->TrainAllMethods();
-  factory->TestAllMethods();
-  factory->EvaluateAllMethods();
-  out_file->Close();
+  //factory->TrainAllMethods();
+  //factory->TestAllMethods();
+  //factory->EvaluateAllMethods();
+  //out_file->Close();
   ApplyMethod(train);
 
   std::cout << "\nEAL : Done!\n";

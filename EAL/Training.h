@@ -3,12 +3,14 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <initializer_list>
 
 #include "TMVA/Factory.h"
 #include "TMVA/DataLoader.h"
 #include "TMVA/Tools.h"
 #include "TMVA/TMVAGui.h"
 #include "TMVA/Reader.h"
+#include "ROOT/RDFHelpers.hxx"
 
 #include "TChain.h"
 #include "TFile.h"
@@ -25,18 +27,104 @@ namespace EAL {
 namespace ML {
 
 /*
+template<typename T, typename... Args>
+T EvalMVA(Args... args) {
+  std::vector<T> vec = {args...};
+}*/
+template<typename T>
+T returnOne(float a, float b, float c, float d, float e,
+            float f, float g, float h, float i, float j,
+            float k, float l, float m, float n, float o) {
+  return 1.0f;
+}
+
+class Something {
+public:
+  float operator()(float a, float b, float c, float d, float e,
+                    float f, float g, float h, float i, float j,
+                    float k, float l, float m, float n, float o) {
+    return 1.0;
+  }
+};
+
 class EvaluateMethod {
 private:
-  //std::vector<float> m_inputs;
-  TMVA::Reader m_reader;
+  std::vector<float> m_inputs;
+  TMVA::Reader* m_reader;
 public:
-  EvaluateMethod(TMVA::Reader reader) : m_reader{reader} {}
+  EvaluateMethod(TMVA::Reader* reader) : m_reader{reader} {}
+/*
+  template<typename T>
+  float returnOne(float a, float b, float c, float d, float e,
+            float f, float g, float h, float i, float j,
+            float k, float l, float m, float n, float o) {
+  std::vector<float> vec{a, b, c, d, e, f, g, h, i, j, k, l, m, n, o};
+  return m_reader->EvaluateMVA(vec, "BDT");
+}
+/*
+  template<typename T>
+  void bar(T t) {}
 
-  auto operator()(std::vector<float> inputs){
-    m_reader->EvaluateMVA(inputs, "BDT method");
+  template<typename... Args>
+  float operator()(Args &&... args) {
+    std::vector<float> dummy = { ((void)bar(std::forward<Args>(args)), args) ... };
+    return m_reader->EvaluateMVA(dummy, "BDT");
+  }
+*/
+  template<typename T>
+  T VecHelper (T element) { return T{element}; }
+  
+  template<typename... Args>
+  float operator()(Args&&... args) {
+    std::vector<float> inputs{ VecHelper(args) ...};
+    return m_reader->EvaluateMVA(inputs, "BDT");
+  }
+/*
+  float operator()(float a, float b, float c, float d, float e,
+                    float f, float g, float h, float i, float j,
+                    float k, float l, float m, float n, float o){
+    m_inputs = {a, b, c, d, e, f, g, h, i, j, k, l, m, n, o};
+    return m_reader->EvaluateMVA(m_inputs, "BDT");
+  }
+/*
+  template<typename T>
+  T operator()(T last) {
+    m_inputs.push_back(last);
+    return m_reader->EvaluateMVA(m_inputs, "BDT");
+  }
+
+  template<typename T, typename... Args>
+  void operator()(T first, Args... args) {
+    m_inputs.push_back(first);
+  }
+
+  template<class T>
+  T operator()(std::initializer_list<T> list) {
+    for (auto element : list) {
+      m_inputs.push_back(element);
+    }
+    return m_reader->EvaluateMVA(m_inputs, "BDT");
+  }
+*/
+};
+
+/*
+class EvaluateMethod {
+private:
+  std::vector<float> m_inputs;
+  TMVA::Reader* m_reader;
+public:
+  EvaluateMethod(TMVA::Reader* reader) : m_reader{reader} {}
+
+  auto operator()(float a, float b, float c, float d, float e,
+                  float f, float g, float h, float i, float j,
+                  float k, float l, float m, float n, float o){
+    m_inputs = {a, b, c, d, e, f, g, h, i, j, k, l, m, n, o};
+    m_reader->EvaluateMVA(m_inputs, "BDT");
   }
 };
 */
+
 class TMVAMethod {
 public:
   std::string m_name;
@@ -88,8 +176,7 @@ public:
 
     }
   }
-
-
 };
+
 }
 }
