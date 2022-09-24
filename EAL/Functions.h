@@ -3,6 +3,23 @@
 #include <cstdint>
 
 namespace EAL {
+
+void Log(std::string_view message) {
+  std::cout << "EAL\t\t:\t" << message << "\n\t\t:\n";
+}
+
+void LogFromFunction(std::string_view func, std::string_view message) {
+  std::cout << "EAL " << "- " << func << " -\t: " << message << "\n\t\t:\n";
+}
+
+void LogLine(std::string_view message) {
+  std::cout << "EAL\t\t:\t" << message << "\n";
+}
+
+void LogLineFromFunction(std::string_view func, std::string_view message) {
+  std::cout << "EAL " << "- " << func << " -\t: " << message << "\n";
+}
+
 namespace Cut {
 
 class WVBoosted {
@@ -217,7 +234,9 @@ struct CutList {
   EAL::Cut::ZeppHad zepp_had_cut;
   EAL::Cut::WVSignalRegion wv_sr_cut;
 };
+}
 
+namespace Define {
 class SetProcessID {
 private:
   const std::unordered_map<std::string, Int_t> m_process_IDs;
@@ -302,11 +321,11 @@ public:
 };
 
 struct DefinesList {
-  EAL::Cut::SetProcessID set_process_ids;
-  EAL::Cut::SetSampleClass set_sample_class;
-  EAL::Cut::SetSampleYear set_sample_year;
-  EAL::Cut::SetSampleLumi set_sample_lumi;
-  EAL::Cut::SetSampleWeight set_sample_weight;
+  EAL::Define::SetProcessID set_process_ids;
+  EAL::Define::SetSampleClass set_sample_class;
+  EAL::Define::SetSampleYear set_sample_year;
+  EAL::Define::SetSampleLumi set_sample_lumi;
+  EAL::Define::SetSampleWeight set_sample_weight;
 
   DefinesList(const std::unordered_map<std::string, Int_t>& process_IDs,
               const std::unordered_map<std::string, int32_t>& class_IDs,
@@ -317,6 +336,5 @@ struct DefinesList {
     set_sample_lumi{samples, class_IDs},
     set_sample_weight{samples} {}
 };
-
 }
 }

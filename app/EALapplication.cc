@@ -29,7 +29,7 @@ using json = nlohmann::json;
 
 void ProcessesDataFrame(std::vector<std::string>& file_names, std::string_view tree_name,
                               EAL::ML::TMVATraining& train,
-                              EAL::Cut::DefinesList& defines,
+                              EAL::Define::DefinesList& defines,
                               EAL::Cut::CutList& cut_list,
                               std::function<bool(int32_t)> class_cut,
                               std::string_view out_tree_name,
@@ -62,7 +62,7 @@ void ProcessesDataFrame(std::vector<std::string>& file_names, std::string_view t
     .Snapshot(out_tree_name, out_file_name, train.m_all_variables, opts);
 }
 
-void CreateIntermediateRootFiles(EAL::Cut::DefinesList& defines,
+void CreateIntermediateRootFiles(EAL::Define::DefinesList& defines,
                                   EAL::Cut::CutList& df_cuts,
                                   EAL::Cut::DataOnly& data_cut,
                                   EAL::Cut::SignalOnly& signal_cut,
@@ -70,32 +70,32 @@ void CreateIntermediateRootFiles(EAL::Cut::DefinesList& defines,
                                   std::vector<std::string>& data_files,
                                   std::vector<std::string>& signal_files,
                                   std::vector<std::string>& background_files,
-                                  EAL::ML::TMVATraining& train,
-                                  std::string_view out_file) {
-  std::cout << "EAL : Creating intermediate ROOT Files\n    :\n";
+                                  EAL::ML::TMVATraining& train) {
+  EAL::LogLine("Creating intermediate ROOT file:");
+  EAL::Log(train.m_intermediate_file);
+
   ROOT::RDF::RSnapshotOptions opts;
   opts.fMode = "RECREATE";
 
-  std::cout << "    : filtering Data dataframe\n    :\n";
-  ProcessesDataFrame(data_files, "Events", train, defines, df_cuts, data_cut, "data", out_file, opts);
+  EAL::Log("filtering Data dataframe");
+  ProcessesDataFrame(data_files, "Events", train, defines, df_cuts, data_cut, "data", train.m_intermediate_file, opts);
 
   opts.fMode = "UPDATE";
-  std::cout << "    : filtering Signal dataframe\n    :\n";
-  ProcessesDataFrame(signal_files, "Events", train, defines, df_cuts, signal_cut, "signal", out_file, opts);
+  EAL::Log("filtering Signal dataframe");
+  ProcessesDataFrame(signal_files, "Events", train, defines, df_cuts, signal_cut, "signal", train.m_intermediate_file, opts);
 
-  std::cout << "    : filtering Background dataframe\n    :\n";
-  ProcessesDataFrame(background_files, "Events", train, defines, df_cuts, background_cut, "background", out_file, opts);
+  EAL::Log("filtering Background dataframe");
+  ProcessesDataFrame(background_files, "Events", train, defines, df_cuts, background_cut, "background", train.m_intermediate_file, opts);
 
-  std::cout << "EAL : Done writing intermediate ROOT Files\n\n";
+  EAL::Log("Done writing intermediate ROOT Files");
 }
 
-std::unique_ptr<TMVA::DataLoader> LoadData(EAL::ML::TMVATraining train,
-                                            std::string in_file) {
-  auto input_file = TFile::Open(in_file.c_str());
+std::unique_ptr<TMVA::DataLoader> LoadData(EAL::ML::TMVATraining train) {
+  auto input_file = TFile::Open((train.m_intermediate_file).c_str());
   auto signal_tree = input_file->Get<TTree>("signal");
   auto background_tree = input_file->Get<TTree>("background");
 
-  auto data_loader = std::make_unique<TMVA::DataLoader>("TMVAoutput");
+  auto data_loader = std::make_unique<TMVA::DataLoader>(train.m_TMVA_output);
   data_loader->AddSignalTree(signal_tree);
   data_loader->SetSignalWeightExpression("mcWeight*genWeight");
   data_loader->AddBackgroundTree(background_tree);
@@ -110,8 +110,7 @@ std::unique_ptr<TMVA::DataLoader> LoadData(EAL::ML::TMVATraining train,
 
   TCut signal_cut = "";
   TCut background_cut = "";
-  data_loader->PrepareTrainingAndTestTree(signal_cut, background_cut, 
-    "nTrain_Signal=0:nTrain_Background=0:SplitMode=Random:NormMode=NumEvents:!V");
+  data_loader->PrepareTrainingAndTestTree(signal_cut, background_cut, train.m_dataloader_settings);
 
   return data_loader;
 }
@@ -120,8 +119,7 @@ std::unique_ptr<TMVA::Factory> CreateTMVAFactory(TMVA::DataLoader* data_loader,
                                                   EAL::ML::TMVATraining train,
                                                   TFile* out_file) {
   auto factory = std::make_unique<TMVA::Factory>("TMVAClassification", out_file, 
-                                                  "!V:!Silent:Color:DrawProgressBar:"
-                                                  "AnalysisType=Classification");
+                                                  train.m_factory_settings);
 
   for (const auto& method : train.m_methods) {
     if (method.m_type == "kBDT") {
@@ -137,11 +135,23 @@ std::unique_ptr<TMVA::Factory> CreateTMVAFactory(TMVA::DataLoader* data_loader,
 }
 
 
+auto ApplyDefines(ROOT::RDF::RNode df, EAL::ML::TMVATraining train, 
+                  TMVA::Reader* reader, unsigned int i = 0) {
+  if (i == train.m_methods.size()) return df;
+
+  EAL::ML::EvaluateMethod eval{reader, train.m_methods[i].m_name};
+
+  return ApplyDefines(df.Define(train.m_methods[i].m_name,  
+                      ROOT::Internal::RDF::PassAsVec<15, float>(eval),
+                      train.m_training_variables), train, reader, ++i);
+}
+
 void ApplyMethod(EAL::ML::TMVATraining train) {
+  std::string function_name{"ApplyMethod"};
   EAL::EventHolder event{train};
-  std::cout << "debug 1\n";
-  auto reader = std::make_unique<TMVA::Reader>("!Color:!Silent");
-  std::cout << "debug 2\n";
+
+  auto reader = std::make_unique<TMVA::Reader>(train.m_reader_settings);
+
   for (const auto& variable : train.m_training_variables) {
     if (train.m_variable_types.at(variable) == "F") {
       reader->AddVariable(variable, &event.variables_f.at(variable));
@@ -149,7 +159,7 @@ void ApplyMethod(EAL::ML::TMVATraining train) {
       reader->AddVariable(variable, &event.variables_i.at(variable));
     }
   }
-std::cout << "debug 3\n";
+
   for (const auto& spectator : train.m_training_spectators) {
     if (train.m_variable_types.at(spectator) == "F") {
       reader->AddSpectator(spectator, &event.variables_f.at(spectator));
@@ -157,50 +167,43 @@ std::cout << "debug 3\n";
       reader->AddSpectator(spectator, &event.variables_i.at(spectator));
     }
   }
-std::cout << "debug 4\n";
-  // Fix this! Make the naming programatic, and when bookin the weight file names
-  // should be entered programatically. Right now it's just a proof of concept.
+
+  std::string weight_file = train.m_TMVA_output+"/weights/TMVAClassification_";
   for (const auto& method : train.m_methods) {
-    if (method.m_type == "kBDT") {
-      reader->BookMVA(method.m_name, "TMVAoutput/weights/TMVAClassification_BDT.weights.xml");
-    } else if (method.m_type == "kDNN") {
-      reader->BookMVA(method.m_name, "TMVAoutput/weights/TMVAClassification_DNN_GPU.weights.xml");
-    }
+    reader->BookMVA(method.m_name, weight_file+method.m_name+".weights.xml");
   }
-  std::cout << "EAL : reader methods booked\n    :\n";
 
-  auto EvaluateMethods = [&reader](float a, float b, float c, float d, float e,
-                                  float f, float g, float h, float i, float j,
-                                  float k, float l, float m, float n, float o){
-    //std::vector<float> input{l, b, n, d, g, e, f, h, j, i, o, m, a, c, k};                   
-    std::vector<float> inputs{a, b, c, d, e, f, g, h, i, j, k, l, m, n, o};
-    return reader->EvaluateMVA(inputs, "BDT");
-  };
-  auto evalMethod = [&reader](std::vector<float> args) {
-    return reader->EvaluateMVA(args, "BDT");
-  };
+  EAL::LogFromFunction(function_name, "reader methods booked");
 
-  EAL::ML::Something something;
-  EAL::ML::EvaluateMethod evaluate{reader.get()};
-
-  std::cout << "EAL : evaluation object constructed\n    :\n";
   ROOT::RDF::RSnapshotOptions opts;
-  //opts.fMode = "RECREATE";
+  opts.fMode = "UPDATE";
   opts.fOverwriteIfExists = true;
-  std::vector<std::string> allvars{train.m_training_variables};
-  allvars.push_back("BDT_response");
-  std::cout << "EAL : Applying Model\n    :\n";
-  ROOT::RDataFrame df("data", "intermediate.root");
-  float a{}, b{}, c{}, d{}, e{}, f{}, g{}, h{}, i{}, j{}, k{}, l{}, m{}, n{}, o{};
 
-  //float output = evaluate(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
-  //std::cout << " output " << output << '\n';
+  std::vector<std::string> all_vars{train.m_all_variables};
+  EAL::LogLine("Applying Models");
 
-  df.Define("BDT_response", ROOT::Internal::RDF::PassAsVec<15, float>(evalMethod), train.m_training_variables)
-    .Snapshot("data", "TMVAapplied2.root", allvars, opts);
-  std::cout << "EAL : Dataframe saved\n    :\n";
-  //ROOT::RDataFrame df2("signal")
+  ROOT::RDataFrame df("data", train.m_intermediate_file);
+  //auto df_with_defines = ApplyDefines(df, train, reader.get());
+  auto latest_df = std::make_unique<ROOT::RDF::RNode>(df);
 
+  for (const auto& method : train.m_methods) {
+    EAL::ML::EvaluateMethod eval{reader.get(), method.m_name};
+    EAL::Log("\tAppying "+method.m_name);
+    all_vars.push_back(method.m_name);
+    latest_df = std::make_unique<ROOT::RDF::RNode>(latest_df->Define(method.m_name,
+                                ROOT::Internal::RDF::PassAsVec<15, float>(eval),
+                                train.m_training_variables));
+    //df.Define(method.m_name, ROOT::Internal::RDF::PassAsVec<15, float>(eval), train.m_training_variables)
+    //.Snapshot(train.m_TMVA_output+"/data", train.m_TMVA_output_file, all_vars, opts);
+  }
+  for (const auto& var : all_vars) {
+    std::cout << "var " << var << '\n';
+  }
+
+  latest_df->Snapshot(train.m_TMVA_output+"/data", train.m_TMVA_output_file, all_vars, opts);
+  //df_with_defines.Snapshot(train.m_TMVA_output+"/data", train.m_TMVA_output_file, all_vars, opts);
+
+  EAL::LogFromFunction(function_name, "Dataframe saved to file:"+train.m_TMVA_output_file);
 }
 
 int EALapplication() {
@@ -235,27 +238,26 @@ int EALapplication() {
   bool debugging = false;
 
   EAL::ML::TMVATraining train("data/config/TMVA_settings.json");
-  std::cout << "\nEAL : Analysis beginning\n    : \n";
+  EAL::Log("Analysis beginning");
 
-  EAL::Cut::DefinesList defines{process_IDs, class_IDs, samples};
+  EAL::Define::DefinesList defines{process_IDs, class_IDs, samples};
   EAL::Cut::CutList df_cuts;
   EAL::Cut::DataOnly data_cut;
   EAL::Cut::SignalOnly signal_cut;
   EAL::Cut::BackgroundOnly background_cut;
-  std::string input_file = "TMVAoutput.root";
-  std::string intermediate_file = "intermediate.root";
-  std::string output_file = "TMVAoutput.root";
-  //std::unique_ptr<TFile> out_file(TFile::Open(output_file.c_str(), "RECREATE"));
-  //CreateIntermediateRootFiles(defines, df_cuts, data_cut, signal_cut, background_cut, data_files, signal_files, background_files, train, intermediate_file);
+
+  std::unique_ptr<TFile> out_file(TFile::Open(train.m_TMVA_output_file.c_str(), "RECREATE"));
+  CreateIntermediateRootFiles(defines, df_cuts, data_cut, signal_cut, background_cut, data_files, signal_files, background_files, train);
   
-  //auto data_loader = LoadData(train, intermediate_file);
+  auto data_loader = LoadData(train);
 
-  //auto factory = CreateTMVAFactory(data_loader.get(), train, out_file.get());
+  auto factory = CreateTMVAFactory(data_loader.get(), train, out_file.get());
 
-  //factory->TrainAllMethods();
-  //factory->TestAllMethods();
-  //factory->EvaluateAllMethods();
-  //out_file->Close();
+  factory->TrainAllMethods();
+  factory->TestAllMethods();
+  factory->EvaluateAllMethods();
+  out_file->Close();
+
   ApplyMethod(train);
 
   std::cout << "\nEAL : Done!\n";

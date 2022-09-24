@@ -26,104 +26,19 @@ using json = nlohmann::json;
 namespace EAL {
 namespace ML {
 
-/*
-template<typename T, typename... Args>
-T EvalMVA(Args... args) {
-  std::vector<T> vec = {args...};
-}*/
-template<typename T>
-T returnOne(float a, float b, float c, float d, float e,
-            float f, float g, float h, float i, float j,
-            float k, float l, float m, float n, float o) {
-  return 1.0f;
-}
-
-class Something {
-public:
-  float operator()(float a, float b, float c, float d, float e,
-                    float f, float g, float h, float i, float j,
-                    float k, float l, float m, float n, float o) {
-    return 1.0;
-  }
-};
-
 class EvaluateMethod {
 private:
-  std::vector<float> m_inputs;
   TMVA::Reader* m_reader;
+  std::string m_method_name;
 public:
-  EvaluateMethod(TMVA::Reader* reader) : m_reader{reader} {}
-/*
-  template<typename T>
-  float returnOne(float a, float b, float c, float d, float e,
-            float f, float g, float h, float i, float j,
-            float k, float l, float m, float n, float o) {
-  std::vector<float> vec{a, b, c, d, e, f, g, h, i, j, k, l, m, n, o};
-  return m_reader->EvaluateMVA(vec, "BDT");
-}
-/*
-  template<typename T>
-  void bar(T t) {}
+  EvaluateMethod(TMVA::Reader* reader, std::string name) : m_reader{reader},
+    m_method_name{name} {}
 
-  template<typename... Args>
-  float operator()(Args &&... args) {
-    std::vector<float> dummy = { ((void)bar(std::forward<Args>(args)), args) ... };
-    return m_reader->EvaluateMVA(dummy, "BDT");
+  float operator()(std::vector<float> inputs) {
+    return m_reader->EvaluateMVA(inputs, m_method_name);
   }
-*/
-  template<typename T>
-  T VecHelper (T element) { return T{element}; }
-  
-  template<typename... Args>
-  float operator()(Args&&... args) {
-    std::vector<float> inputs{ VecHelper(args) ...};
-    return m_reader->EvaluateMVA(inputs, "BDT");
-  }
-/*
-  float operator()(float a, float b, float c, float d, float e,
-                    float f, float g, float h, float i, float j,
-                    float k, float l, float m, float n, float o){
-    m_inputs = {a, b, c, d, e, f, g, h, i, j, k, l, m, n, o};
-    return m_reader->EvaluateMVA(m_inputs, "BDT");
-  }
-/*
-  template<typename T>
-  T operator()(T last) {
-    m_inputs.push_back(last);
-    return m_reader->EvaluateMVA(m_inputs, "BDT");
-  }
-
-  template<typename T, typename... Args>
-  void operator()(T first, Args... args) {
-    m_inputs.push_back(first);
-  }
-
-  template<class T>
-  T operator()(std::initializer_list<T> list) {
-    for (auto element : list) {
-      m_inputs.push_back(element);
-    }
-    return m_reader->EvaluateMVA(m_inputs, "BDT");
-  }
-*/
 };
 
-/*
-class EvaluateMethod {
-private:
-  std::vector<float> m_inputs;
-  TMVA::Reader* m_reader;
-public:
-  EvaluateMethod(TMVA::Reader* reader) : m_reader{reader} {}
-
-  auto operator()(float a, float b, float c, float d, float e,
-                  float f, float g, float h, float i, float j,
-                  float k, float l, float m, float n, float o){
-    m_inputs = {a, b, c, d, e, f, g, h, i, j, k, l, m, n, o};
-    m_reader->EvaluateMVA(m_inputs, "BDT");
-  }
-};
-*/
 
 class TMVAMethod {
 public:
@@ -135,6 +50,10 @@ public:
     m_name = json.at("name");
     m_type = json.at("Types");
     m_options = json.at("options");
+  }
+
+  float EvaluateMethod(TMVA::Reader* reader, std::vector<float> inputs) {
+    return reader->EvaluateMVA(inputs, m_name);
   }
 };
 
@@ -148,7 +67,13 @@ public:
   std::vector<std::string> m_training_spectators;
   std::vector<std::string> m_all_variables; // training variables and spectators
   std::unordered_map<std::string, std::string> m_variable_types;
-  std::string m_outfile_name = "TMVAoutput.root";
+  std::string m_intermediate = "Dataset";
+  std::string m_intermediate_file = "Dataset.root";
+  std::string m_TMVA_output = "TMVAoutput";
+  std::string m_TMVA_output_file = "TMVAoutput.root";
+  std::string m_dataloader_settings;
+  std::string m_factory_settings;
+  std::string m_reader_settings;
 
   TMVATraining(std::string settings_file) {
     std::ifstream TMVA_settings(settings_file);
@@ -157,6 +82,26 @@ public:
     } else {
       json settings;
       TMVA_settings >> settings;
+
+      if (settings.at("analysis").contains("TMVAoutput_file")) {
+        m_TMVA_output = settings.at("analysis").at("TMVAoutput_file");
+        m_TMVA_output_file = m_TMVA_output+".root";
+      }
+
+      if (settings.at("analysis").contains("intermediate_file")) {
+        m_intermediate = settings.at("analysis").at("intermediate");
+        m_intermediate_file = m_intermediate+".root";
+      }
+
+      if (settings.at("analysis").contains("dataloader")) {
+        m_dataloader_settings = settings.at("analysis").at("dataloader");
+      }
+      if (settings.at("analysis").contains("factory")) {
+        m_factory_settings = settings.at("analysis").at("factory");
+      }
+      if (settings.at("analysis").contains("reader")) {
+        m_reader_settings = settings.at("analysis").at("reader");
+      }
 
       for (const auto& method : settings["methods"]) {
         m_methods.emplace_back(method);
