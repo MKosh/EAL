@@ -1,14 +1,13 @@
 {
   "analysis": {
-    "intermediate":"Dataset",
-    "TMVA_output":"TMVAoutput",
+    "intermediate":"Dataset2",
+    "TMVAoutput_file":"TMVAoutput",
     "dataloader":"nTrain_Signal=0:nTrain_Background=0:SplitMode=Random:NormMode=None:!V",
-    "factory":"!V:!Silent:Color:DrawProgressBar:AnalysisType=Classification",
+    "factory":"!V:!Silent:!Color:!DrawProgressBar:AnalysisType=Classification",
     "reader":"!Color:!Silent"
   },
 
   "methods": [
-    {"name":"DNN_GPU", "Types":"kDL", "options":"!H:V:ErrorStrategy=CROSSENTROPY:VarTransform=N:WeightInitialization=XAVIERUNIFORM:Layout=RELU|256,LINEAR::Architecture=GPU"},
     {"name":"BDT", "Types":"kBDT", "options":"!H:!V:NTrees=1000:MinNodeSize=1%:MaxDepth=4:BoostType=AdaBoost:AdaBoostBeta=0.2:UseBaggedBoost:BaggedSampleFraction=0.5:SeparationType=GiniIndex:nCuts=20:UseRandomisedTrees=False:UseNvars=2:NegWeightTreatment=IgnoreNegWeightsInTraining"}
   ],
 
@@ -55,7 +54,7 @@
     {"name": "dilep_pt", "type":"F"},
     {"name": "evt", "type":"I"},
     {"name": "genWeight", "type":"F"},
-    {"name": "process_id", "type":"I"},
+    {"name": "gid", "type":"I"},
     {"name": "L1PFWeight", "type":"F"},
     {"name": "lep1_idEffWeight", "type":"F"},
     {"name": "lep1_iso", "type":"F"},
@@ -69,7 +68,7 @@
     {"name": "lep2_phi", "type":"F"},
     {"name": "lep2_pt", "type":"F"},
     {"name": "lep2_trigEffWeight", "type":"F"},
-    {"name": "lumi", "type":"F"},
+    {"name": "lumin", "type":"F"},
     {"name": "mcWeight", "type":"F"},
     {"name": "MET", "type":"F"},
     {"name": "MET_phi", "type":"F"},

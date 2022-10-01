@@ -34,9 +34,9 @@ struct EventHolder {
 
 enum ClassID {
   kUnknown = -999,
-  kData = 1,
-  kSignal,
-  kBackground
+  kSignal = 0,
+  kBackground = 1,
+  kData = 3
 };
 
 class Sample {

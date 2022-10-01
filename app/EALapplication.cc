@@ -36,8 +36,8 @@ void ProcessesDataFrame(std::vector<std::string>& file_names, std::string_view t
                               std::string_view out_file_name,
                               ROOT::RDF::RSnapshotOptions& opts) {
   ROOT::RDataFrame df(tree_name, file_names, train.m_all_variables);
-  df.DefinePerSample("process_id", defines.set_process_ids)
-    .DefinePerSample("lumi", defines.set_sample_lumi)
+  df.DefinePerSample("gid", defines.set_process_ids)
+    .DefinePerSample("lumin", defines.set_sample_lumi)
     .DefinePerSample("year", defines.set_sample_year)
     .DefinePerSample("mcWeight", defines.set_sample_weight)
     .DefinePerSample("class_id", defines.set_sample_class)
@@ -103,9 +103,11 @@ std::unique_ptr<TMVA::DataLoader> LoadData(EAL::ML::TMVATraining train) {
 
   for (const auto& variable : train.m_training_variables) {
     data_loader->AddVariable(variable);
+    EAL::LogLine("variable = " + variable + ", type = " + train.m_variable_types.at(variable)[0]);
   }
   for (const auto& spectator : train.m_training_spectators) {
     data_loader->AddSpectator(spectator, train.m_variable_types.at(spectator)[0]);
+    EAL::LogLine("variable = " + spectator + ", type = " + train.m_variable_types.at(spectator)[0]);
   }
 
   TCut signal_cut = "";
@@ -155,16 +157,20 @@ void ApplyMethod(EAL::ML::TMVATraining train) {
   for (const auto& variable : train.m_training_variables) {
     if (train.m_variable_types.at(variable) == "F") {
       reader->AddVariable(variable, &event.variables_f.at(variable));
+      EAL::LogLine("Adding variable : " + variable);
     } else if (train.m_variable_types.at(variable) == "I") {
       reader->AddVariable(variable, &event.variables_i.at(variable));
+      EAL::LogLine("Adding variable : " + variable);
     }
   }
 
   for (const auto& spectator : train.m_training_spectators) {
     if (train.m_variable_types.at(spectator) == "F") {
       reader->AddSpectator(spectator, &event.variables_f.at(spectator));
+      EAL::LogLine("Adding spectator : " + spectator + ", F type = " + train.m_variable_types.at(spectator));
     } else if (train.m_variable_types.at(spectator) == "I") {
       reader->AddSpectator(spectator, &event.variables_i.at(spectator));
+      EAL::LogLine("Adding spectator : " + spectator + ", I type = " + train.m_variable_types.at(spectator));
     }
   }
 
@@ -196,11 +202,9 @@ void ApplyMethod(EAL::ML::TMVATraining train) {
     //df.Define(method.m_name, ROOT::Internal::RDF::PassAsVec<15, float>(eval), train.m_training_variables)
     //.Snapshot(train.m_TMVA_output+"/data", train.m_TMVA_output_file, all_vars, opts);
   }
-  for (const auto& var : all_vars) {
-    std::cout << "var " << var << '\n';
-  }
-
-  latest_df->Snapshot(train.m_TMVA_output+"/data", train.m_TMVA_output_file, all_vars, opts);
+  latest_df = std::make_unique<ROOT::RDF::RNode>(latest_df->Define("classID", [](){ return 3; }));
+  all_vars.emplace_back("classID");
+  latest_df->Snapshot(train.m_TMVA_output+"/DataTree", train.m_TMVA_output_file, all_vars, opts);
   //df_with_defines.Snapshot(train.m_TMVA_output+"/data", train.m_TMVA_output_file, all_vars, opts);
 
   EAL::LogFromFunction(function_name, "Dataframe saved to file:"+train.m_TMVA_output_file);
@@ -261,6 +265,10 @@ int EALapplication() {
   ApplyMethod(train);
 
   std::cout << "\nEAL : Done!\n";
+
+  //ROOT::RDataFrame df{"background", "Dataset.root"};
+  //df.Histo1D({"hist", "hist", 20, 0.0, })
+
   return 0;
 }
 

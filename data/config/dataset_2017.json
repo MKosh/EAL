@@ -8,7 +8,7 @@
   "processes":{
     "Data": {
       "class":"data",
-      "process_id":1,
+      "process_id":3,
       "process_color":1,
       "samples": [
         {"name": "Data", "xs": 1.0, "nMC": 1.0, "nMCneg":0}
@@ -17,7 +17,7 @@
     
     "VBS_EWK": {
       "class": "signal",
-      "process_id":11,
+      "process_id":1,
       "process_color":626,
       "samples": [
           {"name": "WminusTo2JZTo2LJJ_EWK_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8"      , "xs": 0.02982,  "nMC": 586811.75,  "nMCneg":0},

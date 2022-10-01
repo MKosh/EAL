@@ -1,1 +1,4 @@
 {"name":"DNN_GPU", "Types":"kDL", "options":"!H:V:ErrorStrategy=CROSSENTROPY:VarTransform=N:WeightInitialization=XAVIERUNIFORM:Layout=RELU|256,LINEAR::Architecture=GPU"}
+{"name":"DNN_GPU2", "Types":"kDL", "options":"!H:V:ErrorStrategy=CROSSENTROPY:VarTransform=N:WeightInitialization=XAVIERUNIFORM:Layout=RELU|64,RELU|64,RELU|32,LINEAR::Architecture=GPU"},
+{"name":"BDT2", "Types":"kBDT", "options":"!H:!V:NTrees=850:MinNodeSize=2.5%:MaxDepth=3:BoostType=AdaBoost:AdaBoostBeta=0.5:UseBaggedBoost:BaggedSampleFraction=0.5:SeparationType=GiniIndex:nCuts=20:UseRandomisedTrees=True:NegWeightTreatment=IgnoreNegWeightsInTraining"}
+{"name":"DNN_GPU", "Types":"kDL", "options":"!H:V:ErrorStrategy=CROSSENTROPY:VarTransform=N:WeightInitialization=XAVIERUNIFORM:Layout=RELU|256,LINEAR::Architecture=GPU"},

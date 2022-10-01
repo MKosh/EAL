@@ -1,0 +1,593 @@
+EAL		:	Analysis beginning
+		:
+DataSetInfo              : [TMVAoutput] : Added class "Signal"
+                         : Add Tree signal of type Signal with 43111 events
+DataSetInfo              : [TMVAoutput] : Added class "Background"
+                         : Add Tree background of type Background with 309537 events
+EAL		:	variable = bos_PuppiAK8_eta, type = F
+		:
+EAL		:	variable = bos_PuppiAK8_m_sd0_corr, type = F
+		:
+EAL		:	variable = bos_PuppiAK8_tau2tau1, type = F
+		:
+EAL		:	variable = dibos_m, type = F
+		:
+EAL		:	variable = lep1_eta, type = F
+		:
+EAL		:	variable = nJet30f, type = F
+		:
+EAL		:	variable = vbf1_AK4_eta, type = F
+		:
+EAL		:	variable = vbf1_AK4_qgid, type = F
+		:
+EAL		:	variable = vbf2_AK4_eta, type = F
+		:
+EAL		:	variable = vbf2_AK4_qgid, type = F
+		:
+EAL		:	variable = vbf_deta, type = F
+		:
+EAL		:	variable = vbf_eta, type = F
+		:
+EAL		:	variable = vbf_m, type = F
+		:
+EAL		:	variable = zeppHad, type = F
+		:
+EAL		:	variable = zeppLep, type = F
+		:
+EAL		:	variable = AntiIsoInt, type = I
+		:
+EAL		:	variable = bos_AK4AK4_eta, type = F
+		:
+EAL		:	variable = bos_AK4AK4_m, type = F
+		:
+EAL		:	variable = bos_AK4AK4_pt, type = F
+		:
+EAL		:	variable = bosCent, type = F
+		:
+EAL		:	variable = bos_j1_AK4_eta, type = F
+		:
+EAL		:	variable = bos_j1_AK4_pt, type = F
+		:
+EAL		:	variable = bos_j2_AK4_eta, type = F
+		:
+EAL		:	variable = bos_j2_AK4_pt, type = F
+		:
+EAL		:	variable = bos_PuppiAK8_m_sd0, type = F
+		:
+EAL		:	variable = bos_PuppiAK8_phi, type = F
+		:
+EAL		:	variable = bos_PuppiAK8_pt, type = F
+		:
+EAL		:	variable = btagWeight_loose, type = F
+		:
+EAL		:	variable = dibos_eta, type = F
+		:
+EAL		:	variable = dibos_mt, type = F
+		:
+EAL		:	variable = dibos_phi, type = F
+		:
+EAL		:	variable = dibos_pt, type = F
+		:
+EAL		:	variable = dilep_eta, type = F
+		:
+EAL		:	variable = dilep_m, type = F
+		:
+EAL		:	variable = dilep_mt, type = F
+		:
+EAL		:	variable = dilep_phi, type = F
+		:
+EAL		:	variable = dilep_pt, type = F
+		:
+EAL		:	variable = evt, type = I
+		:
+EAL		:	variable = genWeight, type = F
+		:
+EAL		:	variable = process_id, type = I
+		:
+EAL		:	variable = L1PFWeight, type = F
+		:
+EAL		:	variable = lep1_idEffWeight, type = F
+		:
+EAL		:	variable = lep1_iso, type = F
+		:
+EAL		:	variable = lep1_m, type = F
+		:
+EAL		:	variable = lep1_phi, type = F
+		:
+EAL		:	variable = lep1_pt, type = F
+		:
+EAL		:	variable = lep1_q, type = F
+		:
+EAL		:	variable = lep1_trigEffWeight, type = F
+		:
+EAL		:	variable = lep2_eta, type = F
+		:
+EAL		:	variable = lep2_idEffWeight, type = F
+		:
+EAL		:	variable = lep2_phi, type = F
+		:
+EAL		:	variable = lep2_pt, type = F
+		:
+EAL		:	variable = lep2_trigEffWeight, type = F
+		:
+EAL		:	variable = lumi, type = F
+		:
+EAL		:	variable = mcWeight, type = F
+		:
+EAL		:	variable = MET, type = F
+		:
+EAL		:	variable = MET_phi, type = F
+		:
+EAL		:	variable = nBtag_loose, type = I
+		:
+EAL		:	variable = nBtag_medium, type = I
+		:
+EAL		:	variable = neu_pz_type0, type = F
+		:
+EAL		:	variable = nJet30, type = I
+		:
+EAL		:	variable = nJet50, type = I
+		:
+EAL		:	variable = nPV, type = F
+		:
+EAL		:	variable = puWeight, type = F
+		:
+EAL		:	variable = run, type = I
+		:
+EAL		:	variable = vbf1_AK4_m, type = F
+		:
+EAL		:	variable = vbf1_AK4_phi, type = F
+		:
+EAL		:	variable = vbf1_AK4_pt, type = F
+		:
+EAL		:	variable = vbf2_AK4_m, type = F
+		:
+EAL		:	variable = vbf2_AK4_phi, type = F
+		:
+EAL		:	variable = vbf2_AK4_pt, type = F
+		:
+EAL		:	variable = vbf_phi, type = F
+		:
+EAL		:	variable = vbf_pt, type = F
+		:
+EAL		:	variable = year, type = I
+		:
+EAL		:	variable = class_id, type = I
+		:
+Factory                  : Booking method: [1mBDT[0m
+                         : 
+                         : Rebuilding Dataset TMVAoutput
+                         : Building event vectors for type 2 Signal
+                         : Dataset[TMVAoutput] :  create input formulas for tree signal
+                         : Building event vectors for type 2 Background
+                         : Dataset[TMVAoutput] :  create input formulas for tree background
+DataSetFactory           : [TMVAoutput] : Number of events in input trees
+                         : 
+                         : 
+                         : Dataset[TMVAoutput] : No weight renormalisation applied: use original global and event weights
+DataSetInfo              : Correlation matrix (Signal):
+                         : ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                         :                          bos_PuppiAK8_eta bos_PuppiAK8_m_sd0_corr bos_PuppiAK8_tau2tau1 dibos_m lep1_eta nJet30f vbf1_AK4_eta vbf1_AK4_qgid vbf2_AK4_eta vbf2_AK4_qgid vbf_deta vbf_eta   vbf_m zeppHad zeppLep
+                         :        bos_PuppiAK8_eta:           +1.000                  +0.007                +0.003  +0.007   +0.051  +0.001       -0.045        -0.006       +0.219        +0.003   -0.003  +0.205  -0.004  +0.756  -0.212
+                         : bos_PuppiAK8_m_sd0_corr:           +0.007                  +1.000                -0.179  +0.056   +0.005  -0.025       +0.004        +0.009       -0.006        +0.012   +0.027  -0.009  +0.012  +0.010  +0.009
+                         :   bos_PuppiAK8_tau2tau1:           +0.003                  -0.179                +1.000  +0.060   -0.009  +0.042       -0.013        -0.009       +0.010        -0.037   -0.036  -0.006  -0.023  +0.004  -0.008
+                         :                 dibos_m:           +0.007                  +0.056                +0.060  +1.000   -0.003  -0.001       -0.008        -0.013       +0.006        -0.014   +0.135  -0.002  +0.043  +0.009  +0.001
+                         :                lep1_eta:           +0.051                  +0.005                -0.009  -0.003   +1.000  +0.002       +0.033        +0.008       +0.116        -0.002   +0.003  +0.211  -0.008  -0.140  +0.616
+                         :                 nJet30f:           +0.001                  -0.025                +0.042  -0.001   +0.002  +1.000       +0.006        -0.045       -0.004        -0.076   +0.019  -0.001  +0.028  -0.000  -0.007
+                         :            vbf1_AK4_eta:           -0.045                  +0.004                -0.013  -0.008   +0.033  +0.006       +1.000        -0.006       -0.851        +0.012   -0.010  +0.377  +0.002  -0.003  +0.072
+                         :           vbf1_AK4_qgid:           -0.006                  +0.009                -0.009  -0.013   +0.008  -0.045       -0.006        +1.000       +0.009        +0.020   -0.040  +0.009  +0.012  -0.011  +0.005
+                         :            vbf2_AK4_eta:           +0.219                  -0.006                +0.010  +0.006   +0.116  -0.004       -0.851        +0.009       +1.000        -0.004   +0.015  +0.073  +0.003  -0.183  -0.328
+                         :           vbf2_AK4_qgid:           +0.003                  +0.012                -0.037  -0.014   -0.002  -0.076       +0.012        +0.020       -0.004        +1.000   -0.035  +0.017  +0.003  -0.005  -0.010
+                         :                vbf_deta:           -0.003                  +0.027                -0.036  +0.135   +0.003  +0.019       -0.010        -0.040       +0.015        -0.035   +1.000  +0.013  +0.626  -0.012  -0.003
+                         :                 vbf_eta:           +0.205                  -0.009                -0.006  -0.002   +0.211  -0.001       +0.377        +0.009       +0.073        +0.017   +0.013  +1.000  +0.009  -0.304  -0.362
+                         :                   vbf_m:           -0.004                  +0.012                -0.023  +0.043   -0.008  +0.028       +0.002        +0.012       +0.003        +0.003   +0.626  +0.009  +1.000  -0.011  -0.008
+                         :                 zeppHad:           +0.756                  +0.010                +0.004  +0.009   -0.140  -0.000       -0.003        -0.011       -0.183        -0.005   -0.012  -0.304  -0.011  +1.000  +0.147
+                         :                 zeppLep:           -0.212                  +0.009                -0.008  +0.001   +0.616  -0.007       +0.072        +0.005       -0.328        -0.010   -0.003  -0.362  -0.008  +0.147  +1.000
+                         : ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DataSetInfo              : Correlation matrix (Background):
+                         : ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                         :                          bos_PuppiAK8_eta bos_PuppiAK8_m_sd0_corr bos_PuppiAK8_tau2tau1 dibos_m lep1_eta nJet30f vbf1_AK4_eta vbf1_AK4_qgid vbf2_AK4_eta vbf2_AK4_qgid vbf_deta vbf_eta   vbf_m zeppHad zeppLep
+                         :        bos_PuppiAK8_eta:           +1.000                  +0.009                +0.009  +0.001   +0.210  -0.001       +0.039        +0.011       +0.184        -0.006   -0.008  +0.268  -0.005  +0.694  -0.067
+                         : bos_PuppiAK8_m_sd0_corr:           +0.009                  +1.000                -0.168  +0.092   +0.008  +0.016       +0.003        +0.004       -0.000        -0.018   -0.002  +0.005  +0.017  +0.006  +0.008
+                         :   bos_PuppiAK8_tau2tau1:           +0.009                  -0.168                +1.000  +0.058   -0.008  -0.030       -0.002        +0.028       +0.002        +0.012   -0.066  +0.001  -0.009  +0.008  -0.007
+                         :                 dibos_m:           +0.001                  +0.092                +0.058  +1.000   +0.006  -0.005       +0.010        -0.004       -0.009        -0.006   +0.083  +0.007  +0.034  +0.002  +0.002
+                         :                lep1_eta:           +0.210                  +0.008                -0.008  +0.006   +1.000  -0.001       +0.159        +0.003       -0.041        +0.002   -0.002  +0.163  -0.006  +0.090  +0.686
+                         :                 nJet30f:           -0.001                  +0.016                -0.030  -0.005   -0.001  +1.000       -0.005        -0.050       +0.003        -0.023   +0.116  +0.001  +0.122  -0.000  +0.000
+                         :            vbf1_AK4_eta:           +0.039                  +0.003                -0.002  +0.010   +0.159  -0.005       +1.000        -0.003       -0.793        +0.000   -0.005  +0.381  +0.001  +0.007  +0.101
+                         :           vbf1_AK4_qgid:           +0.011                  +0.004                +0.028  -0.004   +0.003  -0.050       -0.003        +1.000       +0.002        -0.004   +0.008  -0.002  +0.071  +0.010  +0.001
+                         :            vbf2_AK4_eta:           +0.184                  -0.000                +0.002  -0.009   -0.041  +0.003       -0.793        +0.002       +1.000        -0.000   +0.002  +0.173  -0.002  -0.266  -0.417
+                         :           vbf2_AK4_qgid:           -0.006                  -0.018                +0.012  -0.006   +0.002  -0.023       +0.000        -0.004       -0.000        +1.000   +0.068  +0.001  +0.083  -0.006  +0.003
+                         :                vbf_deta:           -0.008                  -0.002                -0.066  +0.083   -0.002  +0.116       -0.005        +0.008       +0.002        +0.068   +1.000  -0.003  +0.618  -0.006  -0.002
+                         :                 vbf_eta:           +0.268                  +0.005                +0.001  +0.007   +0.163  +0.001       +0.381        -0.002       +0.173        +0.001   -0.003  +1.000  -0.008  -0.354  -0.401
+                         :                   vbf_m:           -0.005                  +0.017                -0.009  +0.034   -0.006  +0.122       +0.001        +0.071       -0.002        +0.083   +0.618  -0.008  +1.000  -0.003  -0.004
+                         :                 zeppHad:           +0.694                  +0.006                +0.008  +0.002   +0.090  -0.000       +0.007        +0.010       -0.266        -0.006   -0.006  -0.354  -0.003  +1.000  +0.357
+                         :                 zeppLep:           -0.067                  +0.008                -0.007  +0.002   +0.686  +0.000       +0.101        +0.001       -0.417        +0.003   -0.002  -0.401  -0.004  +0.357  +1.000
+                         : ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DataSetFactory           : [TMVAoutput] :  
+                         : 
+Factory                  : [1mTrain all methods[0m
+Factory                  : [TMVAoutput] : Create Transformation "I" with events from all classes.
+                         : 
+                         : Transformation, Variable selection : 
+                         : Input : variable 'bos_PuppiAK8_eta' <---> Output : variable 'bos_PuppiAK8_eta'
+                         : Input : variable 'bos_PuppiAK8_m_sd0_corr' <---> Output : variable 'bos_PuppiAK8_m_sd0_corr'
+                         : Input : variable 'bos_PuppiAK8_tau2tau1' <---> Output : variable 'bos_PuppiAK8_tau2tau1'
+                         : Input : variable 'dibos_m' <---> Output : variable 'dibos_m'
+                         : Input : variable 'lep1_eta' <---> Output : variable 'lep1_eta'
+                         : Input : variable 'nJet30f' <---> Output : variable 'nJet30f'
+                         : Input : variable 'vbf1_AK4_eta' <---> Output : variable 'vbf1_AK4_eta'
+                         : Input : variable 'vbf1_AK4_qgid' <---> Output : variable 'vbf1_AK4_qgid'
+                         : Input : variable 'vbf2_AK4_eta' <---> Output : variable 'vbf2_AK4_eta'
+                         : Input : variable 'vbf2_AK4_qgid' <---> Output : variable 'vbf2_AK4_qgid'
+                         : Input : variable 'vbf_deta' <---> Output : variable 'vbf_deta'
+                         : Input : variable 'vbf_eta' <---> Output : variable 'vbf_eta'
+                         : Input : variable 'vbf_m' <---> Output : variable 'vbf_m'
+                         : Input : variable 'zeppHad' <---> Output : variable 'zeppHad'
+                         : Input : variable 'zeppLep' <---> Output : variable 'zeppLep'
+TFHandler_Factory        :                Variable                       Mean                       RMS               [        Min                       Max ]
+                         : --------------------------------------------------------------------------------------------------------------------------------------
+                         :        bos_PuppiAK8_eta:               -0.0036258                  0.96182   [                  -2.3999                   2.3999 ]
+                         : bos_PuppiAK8_m_sd0_corr:                   83.407                   10.591   [                   65.062                   104.94 ]
+                         :   bos_PuppiAK8_tau2tau1:                  0.37314                  0.10685   [                 0.014045                  0.54997 ]
+                         :                 dibos_m:                   549.75                   233.67   [                   128.92                   5915.1 ]
+                         :                lep1_eta:                0.0065338                   1.2575   [                  -2.5000                   2.4995 ]
+                         :                 nJet30f:                   3.2838                   1.2189   [                   2.0000                   13.000 ]
+                         :            vbf1_AK4_eta:               -0.0028610                   2.0578   [                  -4.6963                   4.6934 ]
+                         :           vbf1_AK4_qgid:                  0.52099                  0.37864   [               1.7449e-05                   1.0000 ]
+                         :            vbf2_AK4_eta:                0.0058004                   2.5160   [                  -4.6846                   4.6904 ]
+                         :           vbf2_AK4_qgid:                  0.48431                  0.34582   [               1.2117e-06                   1.0000 ]
+                         :                vbf_deta:                   4.2172                   1.0076   [                   2.5001                   9.1182 ]
+                         :                 vbf_eta:                 0.011736                   2.0892   [                  -7.6344                   8.0684 ]
+                         :                   vbf_m:                   1097.1                   590.13   [                   500.01                   9540.7 ]
+                         :                 zeppHad:               -0.0050955                  0.99409   [                  -3.2146                   3.2444 ]
+                         :                 zeppLep:                0.0035566                   1.0747   [                  -3.4848                   3.2405 ]
+                         : --------------------------------------------------------------------------------------------------------------------------------------
+                         : Ranking input variables (method unspecific)...
+IdTransformation         : Ranking result (top variable is best ranked)
+                         : ------------------------------------------------
+                         : Rank : Variable                : Separation
+                         : ------------------------------------------------
+                         :    1 : vbf_m                   : 1.569e-01
+                         :    2 : bos_PuppiAK8_tau2tau1   : 8.868e-02
+                         :    3 : nJet30f                 : 2.923e-02
+                         :    4 : bos_PuppiAK8_m_sd0_corr : 2.760e-02
+                         :    5 : vbf1_AK4_qgid           : 2.706e-02
+                         :    6 : vbf_deta                : 2.577e-02
+                         :    7 : vbf2_AK4_qgid           : 2.406e-02
+                         :    8 : lep1_eta                : 2.081e-02
+                         :    9 : zeppLep                 : 2.071e-02
+                         :   10 : dibos_m                 : 1.646e-02
+                         :   11 : vbf2_AK4_eta            : 1.276e-02
+                         :   12 : vbf1_AK4_eta            : 1.018e-02
+                         :   13 : bos_PuppiAK8_eta        : 2.089e-03
+                         :   14 : zeppHad                 : 1.429e-03
+                         :   15 : vbf_eta                 : 1.353e-03
+                         : ------------------------------------------------
+Factory                  : Train method: BDT for Classification
+                         : 
+<WARNING>                :  Note, you have events with negative event weight in the sample, but you've chosen to ignore them
+BDT                      : #events: (reweighted) sig: 87774 bkg: 87774
+                         : #events: (unweighted) sig: 21439 bkg: 154109
+                         : Training 1000 Decision Trees ... patience please
+                         : Elapsed time for training with 176323 events: [1;31m42.3 sec[0m         
+BDT                      : [TMVAoutput] : Evaluation of BDT on training sample (176323 events)
+                         : Elapsed time for evaluation of 176323 events: [1;31m13.7 sec[0m       
+                         : Creating xml weight file: [0;36mTMVAoutput/weights/TMVAClassification_BDT.weights.xml[0m
+                         : Creating standalone class: [0;36mTMVAoutput/weights/TMVAClassification_BDT.class.C[0m
+                         : TMVAoutput.root:/TMVAoutput/Method_BDT/BDT
+Factory                  : Training finished
+                         : 
+                         : Ranking input variables (method specific)...
+BDT                      : Ranking result (top variable is best ranked)
+                         : ---------------------------------------------------------
+                         : Rank : Variable                : Variable Importance
+                         : ---------------------------------------------------------
+                         :    1 : vbf_m                   : 1.064e-01
+                         :    2 : bos_PuppiAK8_tau2tau1   : 8.311e-02
+                         :    3 : lep1_eta                : 8.269e-02
+                         :    4 : zeppLep                 : 7.038e-02
+                         :    5 : bos_PuppiAK8_m_sd0_corr : 6.851e-02
+                         :    6 : vbf1_AK4_qgid           : 6.730e-02
+                         :    7 : vbf2_AK4_qgid           : 6.652e-02
+                         :    8 : vbf_deta                : 6.292e-02
+                         :    9 : zeppHad                 : 6.086e-02
+                         :   10 : dibos_m                 : 5.959e-02
+                         :   11 : vbf2_AK4_eta            : 5.779e-02
+                         :   12 : vbf_eta                 : 5.570e-02
+                         :   13 : bos_PuppiAK8_eta        : 5.416e-02
+                         :   14 : nJet30f                 : 5.295e-02
+                         :   15 : vbf1_AK4_eta            : 5.114e-02
+                         : ---------------------------------------------------------
+Factory                  : === Destroy and recreate all methods via weight files for testing ===
+                         : 
+                         : Reading weight file: [0;36mTMVAoutput/weights/TMVAClassification_BDT.weights.xml[0m
+Factory                  : [1mTest all methods[0m
+Factory                  : Test method: BDT for Classification performance
+                         : 
+BDT                      : [TMVAoutput] : Evaluation of BDT on testing sample (176323 events)
+                         : Elapsed time for evaluation of 176323 events: [1;31m9.95 sec[0m       
+Factory                  : [1mEvaluate all methods[0m
+Factory                  : Evaluate classifier: BDT
+                         : 
+BDT                      : [TMVAoutput] : Loop over test events and fill histograms with classifier response...
+                         : 
+TFHandler_BDT            :                Variable                       Mean                       RMS               [        Min                       Max ]
+                         : --------------------------------------------------------------------------------------------------------------------------------------
+                         :        bos_PuppiAK8_eta:              -0.00075308                  0.96752   [                  -2.3999                   2.3994 ]
+                         : bos_PuppiAK8_m_sd0_corr:                   83.557                   10.598   [                   65.062                   104.94 ]
+                         :   bos_PuppiAK8_tau2tau1:                  0.37371                  0.10626   [                0.0071763                  0.54997 ]
+                         :                 dibos_m:                   549.21                   233.02   [                   124.46                   5664.2 ]
+                         :                lep1_eta:               5.2478e-05                   1.2631   [                  -2.5000                   2.4990 ]
+                         :                 nJet30f:                   3.2809                   1.2129   [                   2.0000                   13.000 ]
+                         :            vbf1_AK4_eta:                 0.013390                   2.0622   [                  -4.6621                   4.6895 ]
+                         :           vbf1_AK4_qgid:                  0.52549                  0.37873   [               3.3295e-08                   1.0000 ]
+                         :            vbf2_AK4_eta:               -0.0013188                   2.5123   [                  -4.6973                   4.6973 ]
+                         :           vbf2_AK4_qgid:                  0.48600                  0.34703   [               4.4778e-06                   1.0000 ]
+                         :                vbf_deta:                   4.2192                   1.0102   [                   2.5001                   9.0303 ]
+                         :                 vbf_eta:                0.0095563                   2.0780   [                  -8.2947                   7.8810 ]
+                         :                   vbf_m:                   1101.1                   595.24   [                   500.00                   8596.4 ]
+                         :                 zeppHad:               -0.0067887                  0.99327   [                  -3.2319                   3.2747 ]
+                         :                 zeppLep:               -0.0057158                   1.0769   [                  -3.5102                   3.4807 ]
+                         : --------------------------------------------------------------------------------------------------------------------------------------
+                         : 
+                         : Evaluation results ranked by best signal efficiency and purity (area)
+                         : -------------------------------------------------------------------------------------------------------------------
+                         : DataSet       MVA                       
+                         : Name:         Method:          ROC-integ
+                         : TMVAoutput    BDT            : 0.836
+                         : -------------------------------------------------------------------------------------------------------------------
+                         : 
+                         : Testing efficiency compared to training efficiency (overtraining check)
+                         : -------------------------------------------------------------------------------------------------------------------
+                         : DataSet              MVA              Signal efficiency: from test sample (from training sample) 
+                         : Name:                Method:          @B=0.01             @B=0.10            @B=0.30   
+                         : -------------------------------------------------------------------------------------------------------------------
+                         : TMVAoutput           BDT            : 0.189 (0.208)       0.560 (0.574)      0.806 (0.814)
+                         : -------------------------------------------------------------------------------------------------------------------
+                         : 
+Dataset:TMVAoutput       : Created tree 'TestTree' with 176323 events
+                         : 
+Dataset:TMVAoutput       : Created tree 'TrainTree' with 176323 events
+                         : 
+Factory                  : [1mThank you for using TMVA![0m
+                         : [1mFor citation information, please visit: http://tmva.sf.net/citeTMVA.html[0m
+EAL		:	Adding variable : bos_PuppiAK8_eta
+		:
+EAL		:	Adding variable : bos_PuppiAK8_m_sd0_corr
+		:
+EAL		:	Adding variable : bos_PuppiAK8_tau2tau1
+		:
+EAL		:	Adding variable : dibos_m
+		:
+EAL		:	Adding variable : lep1_eta
+		:
+EAL		:	Adding variable : nJet30f
+		:
+EAL		:	Adding variable : vbf1_AK4_eta
+		:
+EAL		:	Adding variable : vbf1_AK4_qgid
+		:
+EAL		:	Adding variable : vbf2_AK4_eta
+		:
+EAL		:	Adding variable : vbf2_AK4_qgid
+		:
+EAL		:	Adding variable : vbf_deta
+		:
+EAL		:	Adding variable : vbf_eta
+		:
+EAL		:	Adding variable : vbf_m
+		:
+EAL		:	Adding variable : zeppHad
+		:
+EAL		:	Adding variable : zeppLep
+		:
+EAL		:	Adding spectator : AntiIsoInt, I type = I
+		:
+EAL		:	Adding spectator : bos_AK4AK4_eta, F type = F
+		:
+EAL		:	Adding spectator : bos_AK4AK4_m, F type = F
+		:
+EAL		:	Adding spectator : bos_AK4AK4_pt, F type = F
+		:
+EAL		:	Adding spectator : bosCent, F type = F
+		:
+EAL		:	Adding spectator : bos_j1_AK4_eta, F type = F
+		:
+EAL		:	Adding spectator : bos_j1_AK4_pt, F type = F
+		:
+EAL		:	Adding spectator : bos_j2_AK4_eta, F type = F
+		:
+EAL		:	Adding spectator : bos_j2_AK4_pt, F type = F
+		:
+EAL		:	Adding spectator : bos_PuppiAK8_m_sd0, F type = F
+		:
+EAL		:	Adding spectator : bos_PuppiAK8_phi, F type = F
+		:
+EAL		:	Adding spectator : bos_PuppiAK8_pt, F type = F
+		:
+EAL		:	Adding spectator : btagWeight_loose, F type = F
+		:
+EAL		:	Adding spectator : dibos_eta, F type = F
+		:
+EAL		:	Adding spectator : dibos_mt, F type = F
+		:
+EAL		:	Adding spectator : dibos_phi, F type = F
+		:
+EAL		:	Adding spectator : dibos_pt, F type = F
+		:
+EAL		:	Adding spectator : dilep_eta, F type = F
+		:
+EAL		:	Adding spectator : dilep_m, F type = F
+		:
+EAL		:	Adding spectator : dilep_mt, F type = F
+		:
+EAL		:	Adding spectator : dilep_phi, F type = F
+		:
+EAL		:	Adding spectator : dilep_pt, F type = F
+		:
+EAL		:	Adding spectator : evt, I type = I
+		:
+EAL		:	Adding spectator : genWeight, F type = F
+		:
+EAL		:	Adding spectator : process_id, I type = I
+		:
+EAL		:	Adding spectator : L1PFWeight, F type = F
+		:
+EAL		:	Adding spectator : lep1_idEffWeight, F type = F
+		:
+EAL		:	Adding spectator : lep1_iso, F type = F
+		:
+EAL		:	Adding spectator : lep1_m, F type = F
+		:
+EAL		:	Adding spectator : lep1_phi, F type = F
+		:
+EAL		:	Adding spectator : lep1_pt, F type = F
+		:
+EAL		:	Adding spectator : lep1_q, F type = F
+		:
+EAL		:	Adding spectator : lep1_trigEffWeight, F type = F
+		:
+EAL		:	Adding spectator : lep2_eta, F type = F
+		:
+EAL		:	Adding spectator : lep2_idEffWeight, F type = F
+		:
+EAL		:	Adding spectator : lep2_phi, F type = F
+		:
+EAL		:	Adding spectator : lep2_pt, F type = F
+		:
+EAL		:	Adding spectator : lep2_trigEffWeight, F type = F
+		:
+EAL		:	Adding spectator : lumi, F type = F
+		:
+EAL		:	Adding spectator : mcWeight, F type = F
+		:
+EAL		:	Adding spectator : MET, F type = F
+		:
+EAL		:	Adding spectator : MET_phi, F type = F
+		:
+EAL		:	Adding spectator : nBtag_loose, I type = I
+		:
+EAL		:	Adding spectator : nBtag_medium, I type = I
+		:
+EAL		:	Adding spectator : neu_pz_type0, F type = F
+		:
+EAL		:	Adding spectator : nJet30, I type = I
+		:
+EAL		:	Adding spectator : nJet50, I type = I
+		:
+EAL		:	Adding spectator : nPV, F type = F
+		:
+EAL		:	Adding spectator : puWeight, F type = F
+		:
+EAL		:	Adding spectator : run, I type = I
+		:
+EAL		:	Adding spectator : vbf1_AK4_m, F type = F
+		:
+EAL		:	Adding spectator : vbf1_AK4_phi, F type = F
+		:
+EAL		:	Adding spectator : vbf1_AK4_pt, F type = F
+		:
+EAL		:	Adding spectator : vbf2_AK4_m, F type = F
+		:
+EAL		:	Adding spectator : vbf2_AK4_phi, F type = F
+		:
+EAL		:	Adding spectator : vbf2_AK4_pt, F type = F
+		:
+EAL		:	Adding spectator : vbf_phi, F type = F
+		:
+EAL		:	Adding spectator : vbf_pt, F type = F
+		:
+EAL		:	Adding spectator : year, I type = I
+		:
+EAL		:	Adding spectator : class_id, I type = I
+		:
+                         : Booking "BDT" of type "BDT" from TMVAoutput/weights/TMVAClassification_BDT.weights.xml.
+                         : Reading weight file: TMVAoutput/weights/TMVAClassification_BDT.weights.xml
+<HEADER> DataSetInfo              : [Default] : Added class "Signal"
+<HEADER> DataSetInfo              : [Default] : Added class "Background"
+                         : Booked classifier "BDT" of type: "BDT"
+EAL - ApplyMethod -	: reader methods booked
+		:
+EAL		:	Applying Models
+EAL		:		Appying BDT
+		:
+var bos_PuppiAK8_eta
+var bos_PuppiAK8_m_sd0_corr
+var bos_PuppiAK8_tau2tau1
+var dibos_m
+var lep1_eta
+var nJet30f
+var vbf1_AK4_eta
+var vbf1_AK4_qgid
+var vbf2_AK4_eta
+var vbf2_AK4_qgid
+var vbf_deta
+var vbf_eta
+var vbf_m
+var zeppHad
+var zeppLep
+var AntiIsoInt
+var bos_AK4AK4_eta
+var bos_AK4AK4_m
+var bos_AK4AK4_pt
+var bosCent
+var bos_j1_AK4_eta
+var bos_j1_AK4_pt
+var bos_j2_AK4_eta
+var bos_j2_AK4_pt
+var bos_PuppiAK8_m_sd0
+var bos_PuppiAK8_phi
+var bos_PuppiAK8_pt
+var btagWeight_loose
+var dibos_eta
+var dibos_mt
+var dibos_phi
+var dibos_pt
+var dilep_eta
+var dilep_m
+var dilep_mt
+var dilep_phi
+var dilep_pt
+var evt
+var genWeight
+var process_id
+var L1PFWeight
+var lep1_idEffWeight
+var lep1_iso
+var lep1_m
+var lep1_phi
+var lep1_pt
+var lep1_q
+var lep1_trigEffWeight
+var lep2_eta
+var lep2_idEffWeight
+var lep2_phi
+var lep2_pt
+var lep2_trigEffWeight
+var lumi
+var mcWeight
+var MET
+var MET_phi
+var nBtag_loose
+var nBtag_medium
+var neu_pz_type0
+var nJet30
+var nJet50
+var nPV
+var puWeight
+var run
+var vbf1_AK4_m
+var vbf1_AK4_phi
+var vbf1_AK4_pt
+var vbf2_AK4_m
+var vbf2_AK4_phi
+var vbf2_AK4_pt
+var vbf_phi
+var vbf_pt
+var year
+var class_id
+var BDT
+EAL - ApplyMethod -	: Dataframe saved to file:TMVAoutput.root
+		:
+
+EAL : Done!
