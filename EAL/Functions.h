@@ -29,6 +29,13 @@ public:
   }
 };
 
+class WVResolved {
+public:
+  auto operator()(Float_t lep2_pt, Float_t bos_AK4AK4_pt) {
+    return (lep2_pt<0.0 && bos_AK4AK4_pt>0.0);
+  }
+};
+
 class Tau21 {
 public:
   auto operator()(Float_t tau21) {
@@ -95,6 +102,13 @@ public:
   }
 };
 
+class ResolvedJetPt {
+public:
+  auto operator()(float bos_j1_AK4_pt, float bos_j2_AK4_pt) {
+    return (bos_j1_AK4_pt > 30 && bos_j2_AK4_pt > 30);
+  }
+};
+
 class VBSJetsMjj {
 public:
   auto operator()(float vbs_m) {
@@ -158,10 +172,17 @@ public:
   }
 };
 
-class WVSignalRegion {
+class WVSignalRegionBoosted {
 public:
   auto operator()(float bos_PuppiAK8_m) {
     return (bos_PuppiAK8_m > 65 && bos_PuppiAK8_m < 105);
+  }
+};
+
+class WVSignalRegionResolved {
+public:
+  auto operator()(float bos_AK4AK4_m) {
+    return (bos_AK4AK4_m > 65 && bos_AK4AK4_m < 105);
   }
 };
 
@@ -219,11 +240,13 @@ struct CutList {
   EAL::Cut::Tau21 tau21_cut;
   EAL::Cut::QGid qgid_cut;
   EAL::Cut::WVBoosted wv_boosted_cut;
+  EAL::Cut::WVResolved wv_resolved_cut;
   EAL::Cut::LepPt lep_pt_cut;
   EAL::Cut::LepEta lep_eta_cut;
   EAL::Cut::FatjetPt fatjet_pt_cut;
   EAL::Cut::FatjetEta fatjet_eta_cut;
   EAL::Cut::FatjetTau21 fatjet_tau21_cut;
+  EAL::Cut::ResolvedJetPt resolved_jet_pt;
   EAL::Cut::VBSJetsMjj vbs_jets_mjj_cut;
   EAL::Cut::VBSJetsPt vbs_jets_pt_cut;
   EAL::Cut::VBSDeltaEta vbs_deta_cut;
@@ -232,7 +255,8 @@ struct CutList {
   EAL::Cut::Isolation iso_cut;
   EAL::Cut::ZeppLep zepp_lep_cut;
   EAL::Cut::ZeppHad zepp_had_cut;
-  EAL::Cut::WVSignalRegion wv_sr_cut;
+  EAL::Cut::WVSignalRegionBoosted wv_sr_cut_b;
+  EAL::Cut::WVSignalRegionResolved wv_sr_cut_r;
 };
 }
 

@@ -2,3 +2,13 @@
 {"name":"DNN_GPU2", "Types":"kDL", "options":"!H:V:ErrorStrategy=CROSSENTROPY:VarTransform=N:WeightInitialization=XAVIERUNIFORM:Layout=RELU|64,RELU|64,RELU|32,LINEAR::Architecture=GPU"},
 {"name":"BDT2", "Types":"kBDT", "options":"!H:!V:NTrees=850:MinNodeSize=2.5%:MaxDepth=3:BoostType=AdaBoost:AdaBoostBeta=0.5:UseBaggedBoost:BaggedSampleFraction=0.5:SeparationType=GiniIndex:nCuts=20:UseRandomisedTrees=True:NegWeightTreatment=IgnoreNegWeightsInTraining"}
 {"name":"DNN_GPU", "Types":"kDL", "options":"!H:V:ErrorStrategy=CROSSENTROPY:VarTransform=N:WeightInitialization=XAVIERUNIFORM:Layout=RELU|256,LINEAR::Architecture=GPU"},
+
+{"name":"BDT1", "Types":"kBDT", "options":"!H:!V::NegWeightTreatment=IgnoreNegWeightsInTraining"},
+{"name":"BDT2", "Types":"kBDT", "options":"!H:!V:NTrees=850:MinNodeSize=2.5%:MaxDepth=3:BoostType=AdaBoost:AdaBoostBeta=0.5:UseBaggedBoost:BaggedSampleFraction=0.5:SeparationType=GiniIndex:nCuts=20:NegWeightTreatment=IgnoreNegWeightsInTraining"},
+{"name":"BDT3", "Types":"kBDT", "options":"!H:!V:NTrees=1000:MinNodeSize=1%:MaxDepth=2:BoostType=AdaBoost:AdaBoostBeta=0.6:UseBaggedBoost:SeparationType=GiniIndex:nCuts=20:NegWeightTreatment=IgnoreNegWeightsInTraining"},
+{"name":"BDT4", "Types":"kBDT", "options":"!H:!V:NTrees=1000:MinNodeSize=2.5%:BoostType=Grad:Shrinkage=0.10:UseBaggedBoost:BaggedSampleFraction=0.5:nCuts=20:MaxDepth=2:NegWeightTreatment=IgnoreNegWeightsInTraining"},
+{"name":"DNN_GPU1", "Types":"kDL", "options":"!H:V:ErrorStrategy=CROSSENTROPY:VarTransform=N:WeightInitialization=XAVIERUNIFORM:Layout=RELU|256,LINEAR::Architecture=GPU"},
+{"name":"DNN_GPU2", "Types":"kDL", "options":"!H:V:ErrorStrategy=CROSSENTROPY:VarTransform=N:WeightInitialization=XAVIERUNIFORM:Layout=RELU|64,RELU|64,RELU|32,LINEAR::Architecture=GPU"},
+{"name":"DNN_GPU3", "Types":"kDL", "options":"!H:V:ErrorStrategy=CROSSENTROPY:VarTransform=N:WeightInitialization=XAVIERUNIFORM:Layout=TANH|256,LINEAR::Architecture=GPU"},
+{"name":"DNN_GPU4", "Types":"kDL", "options":"!H:V:ErrorStrategy=CROSSENTROPY:VarTransform=N:WeightInitialization=XAVIERUNIFORM:Layout=TANH|64,TANH|64,TANH|32,LINEAR::Architecture=GPU"},
+{"name":"MLPBFGS", "Types":"kMLP", "options":"H:!V:NeuronType=tanh:VarTransform=N:NCycles=600:HiddenLayers=N+5:TestRate=5:TrainingMethod=BFGS:!UseRegulator"}

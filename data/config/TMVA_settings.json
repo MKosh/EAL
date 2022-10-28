@@ -1,14 +1,14 @@
 {
   "analysis": {
-    "intermediate":"Dataset2",
-    "TMVAoutput_file":"TMVAoutput",
+    "intermediate":"Dataset_boosted",
+    "TMVAoutput_file":"TMVAoutput_boosted",
     "dataloader":"nTrain_Signal=0:nTrain_Background=0:SplitMode=Random:NormMode=None:!V",
     "factory":"!V:!Silent:!Color:!DrawProgressBar:AnalysisType=Classification",
     "reader":"!Color:!Silent"
   },
 
   "methods": [
-    {"name":"BDT", "Types":"kBDT", "options":"!H:!V:NTrees=1000:MinNodeSize=1%:MaxDepth=4:BoostType=AdaBoost:AdaBoostBeta=0.2:UseBaggedBoost:BaggedSampleFraction=0.5:SeparationType=GiniIndex:nCuts=20:UseRandomisedTrees=False:UseNvars=2:NegWeightTreatment=IgnoreNegWeightsInTraining"}
+    {"name":"BDT1", "Types":"kBDT", "options":"!H:!V::NegWeightTreatment=IgnoreNegWeightsInTraining"} 
   ],
 
   "variables": [

@@ -3,3 +3,5 @@ build/*
 !build/*.so
 *.root
 *.class.C
+*.log
+TMVA*

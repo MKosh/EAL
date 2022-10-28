@@ -41,14 +41,16 @@ void ProcessesDataFrame(std::vector<std::string>& file_names, std::string_view t
     .DefinePerSample("year", defines.set_sample_year)
     .DefinePerSample("mcWeight", defines.set_sample_weight)
     .DefinePerSample("class_id", defines.set_sample_class)
-    .Filter(cut_list.tau21_cut, {"bos_PuppiAK8_tau2tau1"}, "tau21_cut")
+    //.Filter(cut_list.tau21_cut, {"bos_PuppiAK8_tau2tau1"}, "tau21_cut") // boosted
     .Filter(cut_list.qgid_cut, {"vbf1_AK4_qgid","vbf2_AK4_qgid"}, "qgid_cut")
-    .Filter(cut_list.wv_boosted_cut, {"lep2_pt", "bos_PuppiAK8_pt"}, "wv_boosted")
+    //.Filter(cut_list.wv_boosted_cut, {"lep2_pt", "bos_PuppiAK8_pt"}, "wv_boosted") // boosted
+    .Filter(cut_list.wv_resolved_cut, {"lep2_pt", "bos_AK4AK4_pt"}, "wv_resolved") // resolved
     .Filter(cut_list.lep_pt_cut, {"lep1_pt"}, "lep_pt")
     .Filter(cut_list.lep_eta_cut, {"lep1_m", "lep1_eta"}, "lep_eta")
-    .Filter(cut_list.fatjet_pt_cut, {"bos_PuppiAK8_pt"}, "fatjet_pt")
-    .Filter(cut_list.fatjet_eta_cut, {"bos_PuppiAK8_eta"}, "fatjet_eta")
-    .Filter(cut_list.fatjet_tau21_cut, {"bos_PuppiAK8_tau2tau1"}, "fatjet_tau21")
+    //.Filter(cut_list.fatjet_pt_cut, {"bos_PuppiAK8_pt"}, "fatjet_pt") // boosted
+    //.Filter(cut_list.fatjet_eta_cut, {"bos_PuppiAK8_eta"}, "fatjet_eta") // boosted
+    //.Filter(cut_list.fatjet_tau21_cut, {"bos_PuppiAK8_tau2tau1"}, "fatjet_tau21") // boosted
+    .Filter(cut_list.resolved_jet_pt, {"bos_j1_AK4_pt", "bos_j2_AK4_pt"}, "resolved_jets") // resolved
     .Filter(cut_list.vbs_jets_mjj_cut, {"vbf_m"}, "vbs_jets_mjj")
     .Filter(cut_list.vbs_jets_pt_cut, {"vbf1_AK4_pt", "vbf2_AK4_pt"}, "vbs_jets_pt")
     .Filter(cut_list.vbs_deta_cut, {"vbf_deta"}, "vbs_deta")
@@ -57,7 +59,8 @@ void ProcessesDataFrame(std::vector<std::string>& file_names, std::string_view t
     .Filter(cut_list.iso_cut, {"AntiIsoInt", "bosCent"}, "isolation")
     .Filter(cut_list.zepp_lep_cut, {"zeppLep", "vbf_deta"}, "zepp_lep")
     .Filter(cut_list.zepp_had_cut, {"zeppHad", "vbf_deta"}, "zepp_had")
-    .Filter(cut_list.wv_sr_cut, {"bos_PuppiAK8_m_sd0"}, "wv_sr")
+    //.Filter(cut_list.wv_sr_cut_b, {"bos_PuppiAK8_m_sd0"}, "wv_sr_b") // boosted
+    .Filter(cut_list.wv_sr_cut_r, {"bos_AK4AK4_m"}, "wv_sr_r") // resolved
     .Filter(class_cut, {"class_id"})
     .Snapshot(out_tree_name, out_file_name, train.m_all_variables, opts);
 }
@@ -92,6 +95,9 @@ void CreateIntermediateRootFiles(EAL::Define::DefinesList& defines,
 
 std::unique_ptr<TMVA::DataLoader> LoadData(EAL::ML::TMVATraining train) {
   auto input_file = TFile::Open((train.m_intermediate_file).c_str());
+  if (!input_file->IsOpen()) {
+    EAL::Log("input intermediate file not open");
+  }
   auto signal_tree = input_file->Get<TTree>("signal");
   auto background_tree = input_file->Get<TTree>("background");
 
@@ -128,6 +134,10 @@ std::unique_ptr<TMVA::Factory> CreateTMVAFactory(TMVA::DataLoader* data_loader,
       factory->BookMethod(data_loader, TMVA::Types::kBDT, method.m_name, method.m_options);
     } else if (method.m_type == "kDL") {
       factory->BookMethod(data_loader, TMVA::Types::kDL, method.m_name, method.m_options);
+    } else if (method.m_type == "kMLP") {
+      factory->BookMethod(data_loader, TMVA::Types::kMLP, method.m_name, method.m_options);
+    } else if (method.m_type == "kFisher") {
+      factory->BookMethod(data_loader, TMVA::Types::kFisher, method.m_name, method.m_options);
     } else {
       std::cout << "EAL ERROR : I Don't recognize TMVA method - " << method.m_type << '\n';
     }
@@ -199,7 +209,7 @@ void ApplyMethod(EAL::ML::TMVATraining train) {
     latest_df = std::make_unique<ROOT::RDF::RNode>(latest_df->Define(method.m_name,
                                 ROOT::Internal::RDF::PassAsVec<15, float>(eval),
                                 train.m_training_variables));
-    //df.Define(method.m_name, ROOT::Internal::RDF::PassAsVec<15, float>(eval), train.m_training_variables)
+    //df.Define(method.m_name, ROOT::Internal::RDF::<15, float>(eval), train.m_training_variables)
     //.Snapshot(train.m_TMVA_output+"/data", train.m_TMVA_output_file, all_vars, opts);
   }
   latest_df = std::make_unique<ROOT::RDF::RNode>(latest_df->Define("classID", [](){ return 3; }));
@@ -221,7 +231,7 @@ int EALapplication() {
   // Graph the results.
 
   ROOT::EnableImplicitMT();
-
+  //EAL::Log("ahhh1");
   std::vector<json> datasets;
   datasets.emplace_back(EAL::GetJSONContent("data/config/dataset_2016.json"));
   //std::cout << "debugging 2\n";
@@ -241,7 +251,7 @@ int EALapplication() {
 
   bool debugging = false;
 
-  EAL::ML::TMVATraining train("data/config/TMVA_settings.json");
+  EAL::ML::TMVATraining train("data/config/TMVA_settings_resolved.json");
   EAL::Log("Analysis beginning");
 
   EAL::Define::DefinesList defines{process_IDs, class_IDs, samples};
@@ -251,7 +261,7 @@ int EALapplication() {
   EAL::Cut::BackgroundOnly background_cut;
 
   std::unique_ptr<TFile> out_file(TFile::Open(train.m_TMVA_output_file.c_str(), "RECREATE"));
-  CreateIntermediateRootFiles(defines, df_cuts, data_cut, signal_cut, background_cut, data_files, signal_files, background_files, train);
+  //CreateIntermediateRootFiles(defines, df_cuts, data_cut, signal_cut, background_cut, data_files, signal_files, background_files, train);
   
   auto data_loader = LoadData(train);
 
@@ -260,11 +270,23 @@ int EALapplication() {
   factory->TrainAllMethods();
   factory->TestAllMethods();
   factory->EvaluateAllMethods();
+
+  std::ofstream ROC_file;
+  ROC_file.open("docs/ROC/Methods.md", std::ios_base::app);
+  ROC_file << "----------------------------------------\n";
+  ROC_file << "|Method\t|AUC\t|Time (s)\t|Hyperparameters\t|\n";
+  ROC_file << "|:---:|:---:|:---:|:---:|\n";
+  for (const auto& method : train.m_methods) {
+    ROC_file << "| " << method.m_name << "\t| " << factory->GetROCIntegral(data_loader.get(), method.m_name) << "\t| \t| \t|\n";
+  }
+  ROC_file << "----------------------------------------\n\n";
+  ROC_file.close();
+
   out_file->Close();
+  
+  //ApplyMethod(train);
 
-  ApplyMethod(train);
-
-  std::cout << "\nEAL : Done!\n";
+  EAL::Log("Done!");
 
   //ROOT::RDataFrame df{"background", "Dataset.root"};
   //df.Histo1D({"hist", "hist", 20, 0.0, })

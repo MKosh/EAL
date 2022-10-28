@@ -88,7 +88,7 @@ public:
         m_TMVA_output_file = m_TMVA_output+"_SBtmva.root";
       }
 
-      if (settings.at("analysis").contains("intermediate_file")) {
+      if (settings.at("analysis").contains("intermediate")) {
         m_intermediate = settings.at("analysis").at("intermediate");
         m_intermediate_file = m_intermediate+".root";
       }
