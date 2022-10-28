@@ -4,4 +4,4 @@ build/*
 *.root
 *.class.C
 *.log
-TMVA*
+TMVAoutput*
