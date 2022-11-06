@@ -22,6 +22,13 @@ void LogLineFromFunction(std::string_view func, std::string_view message) {
 
 namespace Cut {
 
+class Tau21_nan {
+public:
+  auto operator()(Float_t tau21) {
+    return !(TMath::IsNaN(tau21));
+  }
+};
+
 class WVBoosted {
 public:
   auto operator()(Float_t lep2_pt, Float_t bos_PuppiAK8_pt) {
@@ -238,6 +245,7 @@ public:
 
 struct CutList {
   EAL::Cut::Tau21 tau21_cut;
+  EAL::Cut::Tau21_nan tau21_nan;
   EAL::Cut::QGid qgid_cut;
   EAL::Cut::WVBoosted wv_boosted_cut;
   EAL::Cut::WVResolved wv_resolved_cut;

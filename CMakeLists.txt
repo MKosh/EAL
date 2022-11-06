@@ -20,12 +20,12 @@ find_package(ROOT REQUIRED)
 #  message("Doxygen needs to be installed to generate the documention")
 #endif()
 
-find_library(XML_LIBRARY NAMES libXMLParser.so HINTS ${ROOTSYS}/lib)
-find_library(TMVA_LIBRARY NAMES libTMVA.so HINTS ${ROOTSYS}/lib)
-find_library(TMVAGUI_LIBRARY NAMES libTMVAGui.so HINTS ${ROOTSYS}/lib)
+#find_library(XML_LIBRARY NAMES libXMLParser.so HINTS ${ROOTSYS}/lib)
+find_library(TMVA_LIBRARY NAMES libTMVA.so HINTS /usr/lib/root/libTMVA.so)
+find_library(TMVAGUI_LIBRARY NAMES libTMVAGui.so HINTS /usr/lib/root/libTMVAGui.so)
 
 add_library(EAL SHARED EAL/Analysis.cc EAL/Analysis.h EAL/Training.h)
-target_link_libraries(EAL PUBLIC ROOT::Core ROOT::Tree ROOT::ROOTDataFrame ${XML_LIBRARY} ${TMVA_LIBRARY} ${TMVAGUI_LIBRARY})
+target_link_libraries(EAL PUBLIC ROOT::Core ROOT::Tree ROOT::ROOTDataFrame ${TMVA_LIBRARY} ${TMVAGUI_LIBRARY})
 
 add_subdirectory(app)
 
