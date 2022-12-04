@@ -7,9 +7,9 @@
                 "${workspaceFolder}/EAL",
                 "${workspaceFolder}/include",
                 "/usr/local/include/",
-                "~/packages/root/include",
-                "~/packages/root/lib",
-                "~/packages/root/root/include"
+                "/usr/include",
+                "/usr/lib",
+                "/usr/lib64"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

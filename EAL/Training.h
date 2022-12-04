@@ -76,6 +76,7 @@ public:
   std::string m_reader_settings;
 
   TMVATraining(std::string settings_file) {
+    std::cout << "trying to open settings file: " << settings_file << '\n';
     std::ifstream TMVA_settings(settings_file);
     if (!TMVA_settings.is_open()) {
       std::cout << "ERROR: Cannot open TMVA settings file for configuration." << '\n';
