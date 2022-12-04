@@ -1,0 +1,6 @@
+/home/markm/code/EAL/CMakeFiles/EAL.dir
+/home/markm/code/EAL/CMakeFiles/edit_cache.dir
+/home/markm/code/EAL/CMakeFiles/rebuild_cache.dir
+/home/markm/code/EAL/app/CMakeFiles/EALapplication.dir
+/home/markm/code/EAL/app/CMakeFiles/edit_cache.dir
+/home/markm/code/EAL/app/CMakeFiles/rebuild_cache.dir

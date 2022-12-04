@@ -27,7 +27,7 @@
 /** @endcond */
 using json = nlohmann::json;
 
-void ProcessesDataFrame(std::vector<std::string>& file_names, std::string_view tree_name,
+void ProcessDataFrame(std::vector<std::string>& file_names, std::string_view tree_name,
                               EAL::ML::TMVATraining& train,
                               EAL::Define::DefinesList& defines,
                               EAL::Cut::CutList& cut_list,
@@ -43,24 +43,24 @@ void ProcessesDataFrame(std::vector<std::string>& file_names, std::string_view t
     .DefinePerSample("class_id", defines.set_sample_class)
     .Filter(cut_list.tau21_cut, {"bos_PuppiAK8_tau2tau1"}, "tau21_cut") // boosted
     .Filter(cut_list.qgid_cut, {"vbf1_AK4_qgid","vbf2_AK4_qgid"}, "qgid_cut")
-    //.Filter(cut_list.wv_boosted_cut, {"lep2_pt", "bos_PuppiAK8_pt"}, "wv_boosted") // boosted
-    ////.Filter(cut_list.wv_resolved_cut, {"lep2_pt", "bos_AK4AK4_pt"}, "wv_resolved") // resolved
-    //.Filter(cut_list.lep_pt_cut, {"lep1_pt"}, "lep_pt")
-    //.Filter(cut_list.lep_eta_cut, {"lep1_m", "lep1_eta"}, "lep_eta")
-    //.Filter(cut_list.fatjet_pt_cut, {"bos_PuppiAK8_pt"}, "fatjet_pt") // boosted
-    //.Filter(cut_list.fatjet_eta_cut, {"bos_PuppiAK8_eta"}, "fatjet_eta") // boosted
-    //.Filter(cut_list.fatjet_tau21_cut, {"bos_PuppiAK8_tau2tau1"}, "fatjet_tau21") // boosted
-    ////.Filter(cut_list.resolved_jet_pt, {"bos_j1_AK4_pt", "bos_j2_AK4_pt"}, "resolved_jets") // resolved
-    //.Filter(cut_list.vbs_jets_mjj_cut, {"vbf_m"}, "vbs_jets_mjj")
-    //.Filter(cut_list.vbs_jets_pt_cut, {"vbf1_AK4_pt", "vbf2_AK4_pt"}, "vbs_jets_pt")
-    //.Filter(cut_list.vbs_deta_cut, {"vbf_deta"}, "vbs_deta")
-    //.Filter(cut_list.met_pt_cut, {"MET"}, "met_pt")
-    //.Filter(cut_list.btag_veto_cut, {"nBtag_loose"}, "btag_veto")
-    //.Filter(cut_list.iso_cut, {"AntiIsoInt", "bosCent"}, "isolation")
-    //.Filter(cut_list.zepp_lep_cut, {"zeppLep", "vbf_deta"}, "zepp_lep")
-    //.Filter(cut_list.zepp_had_cut, {"zeppHad", "vbf_deta"}, "zepp_had")
-    //.Filter(cut_list.wv_sr_cut_b, {"bos_PuppiAK8_m_sd0"}, "wv_sr_b") // boosted
-    ////.Filter(cut_list.wv_sr_cut_r, {"bos_AK4AK4_m"}, "wv_sr_r") // resolved
+    .Filter(cut_list.wv_boosted_cut, {"lep2_pt", "bos_PuppiAK8_pt"}, "wv_boosted") // boosted
+    //.Filter(cut_list.wv_resolved_cut, {"lep2_pt", "bos_AK4AK4_pt"}, "wv_resolved") // resolved
+    .Filter(cut_list.lep_pt_cut, {"lep1_pt"}, "lep_pt")
+    .Filter(cut_list.lep_eta_cut, {"lep1_m", "lep1_eta"}, "lep_eta")
+    .Filter(cut_list.fatjet_pt_cut, {"bos_PuppiAK8_pt"}, "fatjet_pt") // boosted
+    .Filter(cut_list.fatjet_eta_cut, {"bos_PuppiAK8_eta"}, "fatjet_eta") // boosted
+    .Filter(cut_list.fatjet_tau21_cut, {"bos_PuppiAK8_tau2tau1"}, "fatjet_tau21") // boosted
+    //.Filter(cut_list.resolved_jet_pt, {"bos_j1_AK4_pt", "bos_j2_AK4_pt"}, "resolved_jets") // resolved
+    .Filter(cut_list.vbs_jets_mjj_cut, {"vbf_m"}, "vbs_jets_mjj")
+    .Filter(cut_list.vbs_jets_pt_cut, {"vbf1_AK4_pt", "vbf2_AK4_pt"}, "vbs_jets_pt")
+    .Filter(cut_list.vbs_deta_cut, {"vbf_deta"}, "vbs_deta")
+    .Filter(cut_list.met_pt_cut, {"MET"}, "met_pt")
+    .Filter(cut_list.btag_veto_cut, {"nBtag_loose"}, "btag_veto")
+    .Filter(cut_list.iso_cut, {"AntiIsoInt", "bosCent"}, "isolation")
+    .Filter(cut_list.zepp_lep_cut, {"zeppLep", "vbf_deta"}, "zepp_lep")
+    .Filter(cut_list.zepp_had_cut, {"zeppHad", "vbf_deta"}, "zepp_had")
+    .Filter(cut_list.wv_sr_cut_b, {"bos_PuppiAK8_m_sd0"}, "wv_sr_b") // boosted
+    //.Filter(cut_list.wv_sr_cut_r, {"bos_AK4AK4_m"}, "wv_sr_r") // resolved
     .Filter(class_cut, {"class_id"})
     .Snapshot(out_tree_name, out_file_name, train.m_all_variables, opts);
 }
@@ -81,14 +81,14 @@ void CreateIntermediateRootFiles(EAL::Define::DefinesList& defines,
   opts.fMode = "RECREATE";
 
   EAL::Log("filtering Data dataframe");
-  ProcessesDataFrame(data_files, "Events", train, defines, df_cuts, data_cut, "data", train.m_intermediate_file, opts);
+  ProcessDataFrame(data_files, "Events", train, defines, df_cuts, data_cut, "data", train.m_intermediate_file, opts);
 
   opts.fMode = "UPDATE";
   EAL::Log("filtering Signal dataframe");
-  ProcessesDataFrame(signal_files, "Events", train, defines, df_cuts, signal_cut, "signal", train.m_intermediate_file, opts);
+  ProcessDataFrame(signal_files, "Events", train, defines, df_cuts, signal_cut, "signal", train.m_intermediate_file, opts);
 
   EAL::Log("filtering Background dataframe");
-  ProcessesDataFrame(background_files, "Events", train, defines, df_cuts, background_cut, "background", train.m_intermediate_file, opts);
+  ProcessDataFrame(background_files, "Events", train, defines, df_cuts, background_cut, "background", train.m_intermediate_file, opts);
 
   EAL::Log("Done writing intermediate ROOT Files");
 }
