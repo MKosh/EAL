@@ -1,6 +1,8 @@
 #include "Rtypes.h"
 #include "TMath.h"
 #include <cstdint>
+#include <iostream>
+#include "Analysis.h"
 
 namespace EAL {
 
@@ -18,6 +20,11 @@ void LogLine(std::string_view message) {
 
 void LogLineFromFunction(std::string_view func, std::string_view message) {
   std::cout << "EAL " << "- " << func << " -\t: " << message << "\n";
+}
+
+void ErrorLog(std::string_view message)
+{
+  std::cout << "EAL - ERROR : " << message << '\n';
 }
 
 namespace Cut {

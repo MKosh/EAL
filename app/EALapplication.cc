@@ -234,14 +234,10 @@ int EALapplication(std::string_view category_selection = "") {
   // Graph the results.
 
   ROOT::EnableImplicitMT();
-  //EAL::Log("ahhh1");
   std::vector<json> datasets;
   datasets.emplace_back(EAL::GetJSONContent("data/config/dataset_2016.json"));
-  //std::cout << "debugging 2\n";
   datasets.emplace_back(EAL::GetJSONContent("data/config/dataset_2017.json"));
-  //std::cout << "debugging 3\n";
   datasets.emplace_back(EAL::GetJSONContent("data/config/dataset_2018.json"));
-  //std::cout << "debugging 4\n";
 
   EAL::Analysis anl = EAL::Analysis(datasets);
 

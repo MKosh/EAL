@@ -92,26 +92,25 @@ EAL_EXTERNAL_OBJECTS =
 
 libEAL.so: CMakeFiles/EAL.dir/EAL/Analysis.cc.o
 libEAL.so: CMakeFiles/EAL.dir/build.make
-libEAL.so: /home/markm/packages/root/root/lib/libROOTDataFrame.so
-libEAL.so: /home/markm/packages/root/root/lib/libXMLParser.so
-libEAL.so: /home/markm/packages/root/root/lib/libTMVA.so
-libEAL.so: /home/markm/packages/root/root/lib/libTMVAGui.so
-libEAL.so: /home/markm/packages/root/root/lib/libTreePlayer.so
-libEAL.so: /home/markm/packages/root/root/lib/libTree.so
-libEAL.so: /home/markm/packages/root/root/lib/libGraf3d.so
-libEAL.so: /home/markm/packages/root/root/lib/libGpad.so
-libEAL.so: /home/markm/packages/root/root/lib/libGraf.so
-libEAL.so: /home/markm/packages/root/root/lib/libHist.so
-libEAL.so: /home/markm/packages/root/root/lib/libMatrix.so
-libEAL.so: /home/markm/packages/root/root/lib/libMathCore.so
-libEAL.so: /home/markm/packages/root/root/lib/libROOTNTuple.so
-libEAL.so: /home/markm/packages/root/root/lib/libImt.so
-libEAL.so: /home/markm/packages/root/root/lib/libMultiProc.so
-libEAL.so: /home/markm/packages/root/root/lib/libNet.so
-libEAL.so: /home/markm/packages/root/root/lib/libRIO.so
-libEAL.so: /home/markm/packages/root/root/lib/libThread.so
-libEAL.so: /home/markm/packages/root/root/lib/libROOTVecOps.so
-libEAL.so: /home/markm/packages/root/root/lib/libCore.so
+libEAL.so: /home/markm/packages/root/lib/libROOTDataFrame.so.6.26.06
+libEAL.so: /home/markm/packages/root/lib/libTMVA.so
+libEAL.so: /home/markm/packages/root/lib/libTMVAGui.so
+libEAL.so: /home/markm/packages/root/lib/libTreePlayer.so.6.26.06
+libEAL.so: /home/markm/packages/root/lib/libTree.so.6.26.06
+libEAL.so: /home/markm/packages/root/lib/libGraf3d.so.6.26.06
+libEAL.so: /home/markm/packages/root/lib/libGpad.so.6.26.06
+libEAL.so: /home/markm/packages/root/lib/libGraf.so.6.26.06
+libEAL.so: /home/markm/packages/root/lib/libHist.so.6.26.06
+libEAL.so: /home/markm/packages/root/lib/libMatrix.so.6.26.06
+libEAL.so: /home/markm/packages/root/lib/libMathCore.so.6.26.06
+libEAL.so: /home/markm/packages/root/lib/libROOTNTuple.so.6.26.06
+libEAL.so: /home/markm/packages/root/lib/libImt.so.6.26.06
+libEAL.so: /home/markm/packages/root/lib/libMultiProc.so.6.26.06
+libEAL.so: /home/markm/packages/root/lib/libNet.so.6.26.06
+libEAL.so: /home/markm/packages/root/lib/libRIO.so.6.26.06
+libEAL.so: /home/markm/packages/root/lib/libThread.so.6.26.06
+libEAL.so: /home/markm/packages/root/lib/libROOTVecOps.so.6.26.06
+libEAL.so: /home/markm/packages/root/lib/libCore.so.6.26.06
 libEAL.so: CMakeFiles/EAL.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/markm/code/EAL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX shared library libEAL.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/EAL.dir/link.txt --verbose=$(VERBOSE)
