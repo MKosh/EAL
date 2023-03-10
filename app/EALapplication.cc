@@ -20,10 +20,10 @@
 #include "TMVA/Reader.h"
 #include "ROOT/RDataFrame.hxx"
 #include "ROOT/RDFHelpers.hxx"
-#include "../include/nlohmann/json.hpp"
-#include "../EAL/Analysis.h"
-#include "../EAL/Training.h"
-#include "../EAL/Functions.h"
+#include "../external/nlohmann/json.hpp"
+#include "../src/EAL/Analysis.h"
+#include "../src/EAL/Training.h"
+#include "../src/EAL/Functions.h"
 /** @endcond */
 using json = nlohmann::json;
 

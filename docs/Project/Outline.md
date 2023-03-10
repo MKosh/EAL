@@ -1,5 +1,0 @@
-# Outline
-___
-
-### Process
-- 

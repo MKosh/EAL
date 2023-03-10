@@ -5,7 +5,7 @@
 #include <initializer_list>
 /* #include "ROOT/RDataFrame.hxx"
 #include "../EAL/Analysis.h" */
-#include "../include/nlohmann/json.hpp"
+#include "../../external/nlohmann/json.hpp"
 #include "../EAL/Analysis.h"
 #include "../EAL/Functions.h"
 
