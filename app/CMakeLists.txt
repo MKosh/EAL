@@ -1,3 +1,5 @@
+set(CMAKE_CXX_STANDARD 17)
 add_executable(EALapplication EALapplication.cc)
+# set_target_properties(EALapplication PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED ON)
 target_include_directories(EALapplication PUBLIC "EAL/")
 target_link_libraries(EALapplication LINK_PUBLIC EAL)

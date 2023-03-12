@@ -1,0 +1,8 @@
+Analysis:
+  name: Thesis
+  Datasets:
+    - test.yaml
+    - test2.yaml
+  Variables:
+    - vars.yaml
+

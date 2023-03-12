@@ -142,29 +142,29 @@ EALapplication/fast:
 	$(MAKE) $(MAKESILENT) -f app/CMakeFiles/EALapplication.dir/build.make app/CMakeFiles/EALapplication.dir/build
 .PHONY : EALapplication/fast
 
-EAL/Analysis.o: EAL/Analysis.cc.o
-.PHONY : EAL/Analysis.o
+src/EAL/Analysis.o: src/EAL/Analysis.cc.o
+.PHONY : src/EAL/Analysis.o
 
 # target to build an object file
-EAL/Analysis.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EAL.dir/build.make CMakeFiles/EAL.dir/EAL/Analysis.cc.o
-.PHONY : EAL/Analysis.cc.o
+src/EAL/Analysis.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EAL.dir/build.make CMakeFiles/EAL.dir/src/EAL/Analysis.cc.o
+.PHONY : src/EAL/Analysis.cc.o
 
-EAL/Analysis.i: EAL/Analysis.cc.i
-.PHONY : EAL/Analysis.i
+src/EAL/Analysis.i: src/EAL/Analysis.cc.i
+.PHONY : src/EAL/Analysis.i
 
 # target to preprocess a source file
-EAL/Analysis.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EAL.dir/build.make CMakeFiles/EAL.dir/EAL/Analysis.cc.i
-.PHONY : EAL/Analysis.cc.i
+src/EAL/Analysis.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EAL.dir/build.make CMakeFiles/EAL.dir/src/EAL/Analysis.cc.i
+.PHONY : src/EAL/Analysis.cc.i
 
-EAL/Analysis.s: EAL/Analysis.cc.s
-.PHONY : EAL/Analysis.s
+src/EAL/Analysis.s: src/EAL/Analysis.cc.s
+.PHONY : src/EAL/Analysis.s
 
 # target to generate assembly for a file
-EAL/Analysis.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EAL.dir/build.make CMakeFiles/EAL.dir/EAL/Analysis.cc.s
-.PHONY : EAL/Analysis.cc.s
+src/EAL/Analysis.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EAL.dir/build.make CMakeFiles/EAL.dir/src/EAL/Analysis.cc.s
+.PHONY : src/EAL/Analysis.cc.s
 
 # Help Target
 help:
@@ -176,9 +176,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... EAL"
 	@echo "... EALapplication"
-	@echo "... EAL/Analysis.o"
-	@echo "... EAL/Analysis.i"
-	@echo "... EAL/Analysis.s"
+	@echo "... src/EAL/Analysis.o"
+	@echo "... src/EAL/Analysis.i"
+	@echo "... src/EAL/Analysis.s"
 .PHONY : help
 
 

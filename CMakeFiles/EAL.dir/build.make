@@ -69,28 +69,28 @@ include CMakeFiles/EAL.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/EAL.dir/flags.make
 
-CMakeFiles/EAL.dir/EAL/Analysis.cc.o: CMakeFiles/EAL.dir/flags.make
-CMakeFiles/EAL.dir/EAL/Analysis.cc.o: EAL/Analysis.cc
-CMakeFiles/EAL.dir/EAL/Analysis.cc.o: CMakeFiles/EAL.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/markm/code/EAL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/EAL.dir/EAL/Analysis.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EAL.dir/EAL/Analysis.cc.o -MF CMakeFiles/EAL.dir/EAL/Analysis.cc.o.d -o CMakeFiles/EAL.dir/EAL/Analysis.cc.o -c /home/markm/code/EAL/EAL/Analysis.cc
+CMakeFiles/EAL.dir/src/EAL/Analysis.cc.o: CMakeFiles/EAL.dir/flags.make
+CMakeFiles/EAL.dir/src/EAL/Analysis.cc.o: src/EAL/Analysis.cc
+CMakeFiles/EAL.dir/src/EAL/Analysis.cc.o: CMakeFiles/EAL.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/markm/code/EAL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/EAL.dir/src/EAL/Analysis.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EAL.dir/src/EAL/Analysis.cc.o -MF CMakeFiles/EAL.dir/src/EAL/Analysis.cc.o.d -o CMakeFiles/EAL.dir/src/EAL/Analysis.cc.o -c /home/markm/code/EAL/src/EAL/Analysis.cc
 
-CMakeFiles/EAL.dir/EAL/Analysis.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EAL.dir/EAL/Analysis.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/markm/code/EAL/EAL/Analysis.cc > CMakeFiles/EAL.dir/EAL/Analysis.cc.i
+CMakeFiles/EAL.dir/src/EAL/Analysis.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EAL.dir/src/EAL/Analysis.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/markm/code/EAL/src/EAL/Analysis.cc > CMakeFiles/EAL.dir/src/EAL/Analysis.cc.i
 
-CMakeFiles/EAL.dir/EAL/Analysis.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EAL.dir/EAL/Analysis.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/markm/code/EAL/EAL/Analysis.cc -o CMakeFiles/EAL.dir/EAL/Analysis.cc.s
+CMakeFiles/EAL.dir/src/EAL/Analysis.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EAL.dir/src/EAL/Analysis.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/markm/code/EAL/src/EAL/Analysis.cc -o CMakeFiles/EAL.dir/src/EAL/Analysis.cc.s
 
 # Object files for target EAL
 EAL_OBJECTS = \
-"CMakeFiles/EAL.dir/EAL/Analysis.cc.o"
+"CMakeFiles/EAL.dir/src/EAL/Analysis.cc.o"
 
 # External object files for target EAL
 EAL_EXTERNAL_OBJECTS =
 
-libEAL.so: CMakeFiles/EAL.dir/EAL/Analysis.cc.o
+libEAL.so: CMakeFiles/EAL.dir/src/EAL/Analysis.cc.o
 libEAL.so: CMakeFiles/EAL.dir/build.make
 libEAL.so: /home/markm/packages/root/lib/libROOTDataFrame.so.6.26.06
 libEAL.so: /home/markm/packages/root/lib/libTMVA.so

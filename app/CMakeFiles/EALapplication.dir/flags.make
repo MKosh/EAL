@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -DVECCORE_ENABLE_VC
 
-CXX_INCLUDES = -I/home/markm/code/EAL/app/EAL -isystem /home/markm/packages/root/include
+CXX_INCLUDES = -I/home/markm/code/EAL/./external -I/home/markm/code/EAL/app/EAL -isystem /home/markm/packages/root/include
 
 CXX_FLAGS = 
 
