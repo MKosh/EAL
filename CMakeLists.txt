@@ -27,11 +27,14 @@ set(CMAKE_CONFIG_PARSER "json" CACHE STRING "Config file parser: json or yaml")
 
 if ("${CMAKE_CONFIG_PARSER}" STREQUAL "json")
   message("Using nlohmann_json parser for config files")
+  # set(ENV{_PARSER} "json")
 elseif ("${CMAKE_CONFIG_PARSER}" STREQUAL "yaml")
   message("Using yaml-cpp parser for config files")
+  # set(ENV{_PARSER} "yaml")
 else()
   message("No config parser specified")
 endif()
+
 
 #find_library(XML_LIBRARY NAMES libXMLParser.so HINTS ${ROOTSYS}/lib)
 find_library(TMVA_LIBRARY NAMES libTMVA.so HINTS /usr/lib/root/libTMVA.so)

@@ -1,12 +1,12 @@
 [
 {
   "directory": "/home/markm/code/EAL",
-  "command": "/usr/bin/c++ -DEAL_EXPORTS -DVECCORE_ENABLE_VC -I/home/markm/code/EAL/./external -isystem /home/markm/packages/root/include -fPIC -o CMakeFiles/EAL.dir/src/EAL/Analysis.cc.o -c /home/markm/code/EAL/src/EAL/Analysis.cc",
+  "command": "/usr/bin/c++ -std=c++17 -DEAL_EXPORTS -DVECCORE_ENABLE_VC -I/home/markm/code/EAL/./external -isystem /home/markm/packages/root/include -fPIC -o CMakeFiles/EAL.dir/src/EAL/Analysis.cc.o -c /home/markm/code/EAL/src/EAL/Analysis.cc",
   "file": "/home/markm/code/EAL/src/EAL/Analysis.cc"
 },
 {
   "directory": "/home/markm/code/EAL/app",
-  "command": "/usr/bin/c++ -DVECCORE_ENABLE_VC -I/home/markm/code/EAL/./external -I/home/markm/code/EAL/app/EAL -isystem /home/markm/packages/root/include  -o CMakeFiles/EALapplication.dir/EALapplication.cc.o -c /home/markm/code/EAL/app/EALapplication.cc",
+  "command": "/usr/bin/c++ -std=c++17 -DVECCORE_ENABLE_VC -I/home/markm/code/EAL/./external -I/home/markm/code/EAL/app/EAL -isystem /home/markm/packages/root/include  -o CMakeFiles/EALapplication.dir/EALapplication.cc.o -c /home/markm/code/EAL/app/EALapplication.cc",
   "file": "/home/markm/code/EAL/app/EALapplication.cc"
 }
 ]

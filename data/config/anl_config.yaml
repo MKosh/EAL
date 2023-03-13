@@ -5,4 +5,5 @@ Analysis:
     - test2.yaml
   Variables:
     - vars.yaml
-
+  MVA:
+    - MVA_settings.yaml

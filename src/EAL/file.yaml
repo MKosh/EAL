@@ -1,0 +1,13 @@
+variables:
+  - name: var1
+    status: variable
+    type: Float_t
+  - name: var2
+    status: variable
+    type: Float_t
+  - name: var3
+    status: variable
+    type: Float_t
+  - name: var4
+    status: variable
+    type: Float_t

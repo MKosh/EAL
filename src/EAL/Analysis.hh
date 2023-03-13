@@ -1,20 +1,15 @@
 #pragma once
 #include <memory>
 
-#include "nlohmann/json.hpp"
+// #include "nlohmann/json.hpp"
+// #include "yaml-cpp/node/parse.h"
 #include "yaml-cpp/yaml.h"
 
 namespace EAL {
 
-enum class EventType {
-  kUknown = -999,
-  kSignal = 0,
-  kBackground,
-  kData
-};
 
 class AnalysisConfig {
-
+  
 };
 
 class Analysis {

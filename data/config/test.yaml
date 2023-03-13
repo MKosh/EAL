@@ -16,50 +16,42 @@ Class:
       process_id: 1
       process_color: 626
       samples:
-        - name: >-
-            WminusTo2JZTo2LJJ_EWK_LO_SM_MJJ100PTJ10_TuneCUETP8M1_13TeV-madgraph-pythia8
+        - name: WminusTo2JZTo2LJJ_EWK_LO_SM_MJJ100PTJ10_TuneCUETP8M1_13TeV-madgraph-pythia8
           xs: 0.02982
           nMC: 200000
           nMCneg: 0
           lumi: 35867.06
-        - name: >-
-            WminusToLNuWminusTo2JJJ_EWK_LO_SM_MJJ100PTJ10_TuneCUETP8M1_13TeV-madgraph-pythia8
+        - name: WminusToLNuWminusTo2JJJ_EWK_LO_SM_MJJ100PTJ10_TuneCUETP8M1_13TeV-madgraph-pythia8
           xs: 0.03259
           nMC: 198300
           nMCneg: 0
           lumi: 35867.06
-        - name: >-
-            WminusToLNuZTo2JJJ_EWK_LO_SM_MJJ100PTJ10_TuneCUETP8M1_13TeV-madgraph-pythia8
+        - name: WminusToLNuZTo2JJJ_EWK_LO_SM_MJJ100PTJ10_TuneCUETP8M1_13TeV-madgraph-pythia8
           xs: 0.1
           nMC: 200000
           nMCneg: 0
           lumi: 35867.06
-        - name: >-
-            WplusTo2JWminusToLNuJJ_EWK_LO_SM_MJJ100PTJ10_TuneCUETP8M1_13TeV-madgraph-pythia8
+        - name: WplusTo2JWminusToLNuJJ_EWK_LO_SM_MJJ100PTJ10_TuneCUETP8M1_13TeV-madgraph-pythia8
           xs: 0.9107
           nMC: 1985200
           nMCneg: 0
           lumi: 35867.06
-        - name: >-
-            WplusTo2JZTo2LJJ_EWK_LO_SM_MJJ100PTJ10_TuneCUETP8M1_13TeV-madgraph-pythia8
+        - name: WplusTo2JZTo2LJJ_EWK_LO_SM_MJJ100PTJ10_TuneCUETP8M1_13TeV-madgraph-pythia8
           xs: 0.05401
           nMC: 178000
           nMCneg: 0
           lumi: 35867.06
-        - name: >-
-            WplusToLNuWminusTo2JJJ_EWK_LO_SM_MJJ100PTJ10_TuneCUETP8M1_13TeV-madgraph-pythia8
+        - name: WplusToLNuWminusTo2JJJ_EWK_LO_SM_MJJ100PTJ10_TuneCUETP8M1_13TeV-madgraph-pythia8
           xs: 0.9114
           nMC: 1998400
           nMCneg: 0
           lumi: 35867.06
-        - name: >-
-            WplusToLNuWplusTo2JJJ_EWK_LO_SM_MJJ100PTJ10_TuneCUETP8M1_13TeV-madgraph-pythia8
+        - name: WplusToLNuWplusTo2JJJ_EWK_LO_SM_MJJ100PTJ10_TuneCUETP8M1_13TeV-madgraph-pythia8
           xs: 0.08793
           nMC: 200000
           nMCneg: 0
           lumi: 35867.06
-        - name: >-
-            WplusToLNuZTo2JJJ_EWK_LO_SM_MJJ100PTJ10_TuneCUETP8M1_13TeV-madgraph-pythia8
+        - name: WplusToLNuZTo2JJJ_EWK_LO_SM_MJJ100PTJ10_TuneCUETP8M1_13TeV-madgraph-pythia8
           xs: 0.1825
           nMC: 390100
           nMCneg: 0
