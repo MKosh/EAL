@@ -1,5 +1,8 @@
 CMakeCache.txt
 build/*
+debug/
+Debug/
+CMakeFiles/
 !build/*.so
 *.root
 *.class.C
@@ -7,3 +10,4 @@ build/*
 TMVAoutput*
 .cache/
 .vscode/
+docs/
