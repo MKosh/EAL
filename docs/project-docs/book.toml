@@ -1,6 +1,0 @@
-[book]
-authors = ["Mark Mekosh"]
-language = "en"
-multilingual = false
-src = "src"
-title = "project-docs"

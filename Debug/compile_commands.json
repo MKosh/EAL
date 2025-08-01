@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/markm/code/EAL/Debug/app",
+  "command": "/usr/bin/c++  -I/home/markm/code/EAL/./external -I/home/markm/code/EAL/app/EAL -isystem /home/markm/packages/root/root/include -g -std=gnu++17 -o CMakeFiles/EALapplication.dir/EALapplication.cc.o -c /home/markm/code/EAL/app/EALapplication.cc",
+  "file": "/home/markm/code/EAL/app/EALapplication.cc"
+}
+]

@@ -1,8 +1,10 @@
+/// \cond
 #include "Rtypes.h"
 #include "TMath.h"
 #include <cstdint>
 #include <iostream>
 #include "Analysis.h"
+/// \endcond
 
 namespace EAL {
 

@@ -1,9 +1,9 @@
 #pragma once
+/// \cond
 #include <memory>
-
-// #include "nlohmann/json.hpp"
-// #include "yaml-cpp/node/parse.h"
-#include "yaml-cpp/yaml.h"
+// #include <gtest/gtest.h>
+/// \endcond
+#include "nlohmann/json.hpp"
 
 namespace EAL {
 

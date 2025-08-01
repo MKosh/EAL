@@ -16,6 +16,11 @@ using json = nlohmann::json;
 /// 
 namespace EAL {
 
+
+////////////////////////////////////////////////////////////////////////////////
+/// Structure to hold a training event
+///
+/// This is a longer description
 struct EventHolder {
   std::unordered_map<std::string,float> variables_f;
   std::unordered_map<std::string,int32_t> variables_i;

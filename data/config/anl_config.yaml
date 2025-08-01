@@ -1,9 +1,0 @@
-Analysis:
-  name: Thesis
-  Datasets:
-    - test.yaml
-    - test2.yaml
-  Variables:
-    - vars.yaml
-  MVA:
-    - MVA_settings.yaml
